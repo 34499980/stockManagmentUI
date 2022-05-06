@@ -1,0 +1,76 @@
+
+    <div fxFlex="100%" fxLayout="row wrap"  class="container">
+        <form [formGroup]="stockForm" fxFlex="100%" fxLayout="row wrap">
+        <div fxFlex="100%" fxLayout="row">
+            <div *ngIf="loading" fxFlex fxLayout="column" fxLayoutAlign="center center" style="height:100%">
+                <mat-spinner diameter="50" strokeWidth="5"></mat-spinner>
+            </div>
+        </div>
+        <div class="wrapper">
+            <div class="one">
+                <app-inputrequired #code title="{{'STOCK.CODE' | translate}}"  formControlName="code" [type]="'text'"></app-inputrequired>
+                <app-inputrequired #name title="{{'STOCK.NAME' | translate}}"  formControlName="name" [type]="'text'"></app-inputrequired>
+                <app-inputrequired #brand title="{{'STOCK.BRAND' | translate}}"  formControlName="brand" [type]="'text'"></app-inputrequired>
+                <mat-form-field appearance="outline" floatLabel="always" color="primary">
+                    <mat-label>{{'STOCK.COUNTRY' | translate}}</mat-label>
+                    <mat-select [formControl]="officeForm.controls.idCountry" [(value)]="stock?.office.idCountry"> 
+                    <mat-option *ngFor="let c of countriesData" [value]="c.id" >
+                        {{c.description}}
+                    
+                    </mat-option>
+                    </mat-select>  
+                </mat-form-field>  
+               
+            </div>
+            <div class="two">              
+                <mat-form-field appearance="outline" floatLabel="always"  color="primary">
+                    <mat-label>{{'STOCK.UNITY' | translate}}</mat-label>
+                    <input matInput type="number"  formControlName="unity" min="0">  
+                  </mat-form-field>  
+                
+                <app-inputrequired #model title="{{'STOCK.MODEL' | translate}}"  formControlName="model" [type]="'text'"></app-inputrequired>
+               
+                <mat-form-field appearance="outline" floatLabel="always" color="primary">
+                    <mat-label>{{'STOCK.OFFICE' | translate}}</mat-label>
+                    <mat-select [formControl]="officeForm.controls.idOffice"> 
+                    <mat-option *ngFor="let c of (officeData$) | async" [value]="c.id" >
+                        {{c.name}}
+                    
+                    </mat-option>
+                    </mat-select>  
+                </mat-form-field> 
+                <app-inputrequired #price title="{{'STOCK.PRICE' | translate}}"  formControlName="price" [type]="'number'"></app-inputrequired>
+       
+            </div>
+            <div class="three">
+                <div fxFlex="100%" >
+                <input [disabled]="showPermission()"  fxFlex="15%" type="file" style="width: 5px;" #file (change)="OnFileSelected($event)" style="visibility: hidden" />
+                <img fxFlex="70%" width="220px"  height="200px" [src]="cameraImage || image" (click)="file.click()" >
+                <!--<button mat-stroked-button style="width: 100%; height: 300px" (click)="OnFileSelected($event)" [disabled]="this._data.bDsiable">Image</button>-->
+                
+              
+               
+               
+                </div>
+            </div>
+            <div class="four">
+                <mat-form-field appearance="outline" fxFlex="93%" class="grow">
+                    <textarea [disabled]="showPermission()" matInput #textarea maxLength="maxLength" formControlName="description" rows="6"
+                      autocomplete="off"></textarea>
+                      <mat-hint align="end" class="mr-12">{{textarea.value.length}} / {{maxlength}}</mat-hint>
+                   
+                </mat-form-field>
+
+            </div>
+        </div>
+        <div fxFlex="100%"  fxLayout="row" fxLayoutAlign="end end">
+            <button mat-button mat-dialog-close >{{'GENERALACTIONS.CANCEL' | translate}}</button>
+            <button mat-raised-button color="primary" class="mx-12"   [disabled]="stockForm.pristine || stockForm.invalid || showPermission()"
+             (click)="save()">{{'GENERALACTIONS.SAVE' | translate}}</button>
+        </div>        
+        
+        </form>
+    </div>
+        
+
+

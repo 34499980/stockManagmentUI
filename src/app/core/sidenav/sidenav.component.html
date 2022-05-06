@@ -1,0 +1,78 @@
+<mat-toolbar  color="primary"  *ngIf="isLogged$ | async as isLoggedIn">
+  <span  *ngIf="isHandset$ | async">Menu</span>
+  <div fxFlex="100%" fxLayoutAlign="space-between">
+    <button
+    type="button"
+    aria-label="Toggle sidenav"
+    mat-icon-button   
+    *ngIf="isHandset$ | async">
+    <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
+  </button>  
+    <div fxFlex="80%"></div>
+      <div fxFlex="20%" fxLayoutAlign="end center">
+        <div>
+     
+    </div>
+      <div>
+        
+        <ngx-avatar fxFlex="50%" [matMenuTriggerFor]="menu" class="pointer"  size="40" [src]="cameraImage || image"></ngx-avatar>
+       
+        <mat-menu #menu="matMenu">
+          <span mat-menu-item fxLayout="100%"  fxLayoutAlign="center center" class="bold">
+            <mat-icon>account_circle</mat-icon>{{userName}}</span>
+          <span mat-menu-item fxLayout="100%"  fxLayoutAlign="center center" class="pointer" [matMenuTriggerFor]="lenguage"  *ngIf="isLoggedIn">
+            <mat-icon>translate</mat-icon>{{'MENU-USER.LENGUAGE' | translate }}</span>
+          <span mat-menu-item fxLayout="100%"  fxLayoutAlign="center center" class="pointer"  (click)="logout()" *ngIf="isLoggedIn">
+            <mat-icon>exit_to_app</mat-icon>{{'MENU-USER.LOGOUT' | translate }}</span>
+        </mat-menu>
+        <mat-menu fxLayout="100%" #lenguage="matMenu">
+          <app-translation fxFlex="100%"></app-translation>
+        </mat-menu>
+      </div>
+    </div>
+    </div> 
+    
+ 
+  
+
+</mat-toolbar>
+
+<mat-sidenav-container class="sidenav-container" color="primary" >
+  <mat-sidenav #drawer class="sidenav" fixedInViewport
+      [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
+      [mode]="(isHandset$ | async) ? 'over' : 'side'"
+      [opened]="(isHandset$ | async) === false"
+      *ngIf="isLogged$ | async as isLoggedIn"
+     >
+     <mat-toolbar color="primary">Menu</mat-toolbar>
+   <mat-accordion displayMode=""  >
+    <mat-expansion-panel flFlex="100" *ngFor="let item of this.screens">
+      <mat-expansion-panel-header class="specific-class">
+        <mat-panel-title class="mat-cell white pointer"><strong>{{'NAV.' + item.title + '.TITLE'| translate}}</strong></mat-panel-title>
+      </mat-expansion-panel-header>
+      
+      <mat-nav-list *ngFor="let i of item.children">   
+
+            <a fxFlex="100" *ngIf="i" class="white pointer"  [routerLink]="i?.url">{{'NAV.' + item.title + '.SUBTITLES.' + i?.title | translate}}</a>
+           
+         
+        </mat-nav-list>
+    
+    </mat-expansion-panel>
+  </mat-accordion>
+
+
+
+
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <div>
+      <router-outlet></router-outlet>
+    </div>
+ 
+  </mat-sidenav-content>
+  
+</mat-sidenav-container>
+
+
+

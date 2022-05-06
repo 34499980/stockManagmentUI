@@ -1,0 +1,373 @@
+{
+    "NAV": {
+        "ADMINISTRATION": {
+            "TITLE": "Administration",
+            "SUBTITLES": {
+                "PROFILE": "Profile",
+                "USERS": "Users",
+                "ANNULMENT": "Annulment",
+                "HISTORY": "History",
+                "DISCOUNT": "Discount",
+                "DISCOUNTCREATE": "Discount create"
+            }
+        },
+        "OFFICE": {
+            "TITLE": "Office",
+            "SUBTITLES": {
+                "OFFICELIST": "Office list",
+                "ADDOFFICE": "Office",
+                "SALES": "All sales",
+                "SALESCREATE": "Sale create",
+                "CHANGES": "Changes"
+            }
+        },
+        "STOCK": {
+            "TITLE": "Action stock",
+            "SUBTITLES": {
+                "STOCKLIST": "Stock",
+                "DISPATCHLIST": "Dispatches",
+                "DISPATCHCREATE": "Create dispatch",
+                "DISPATCHDETAIL": "Dispatch detail"
+            }
+        }
+    },
+    "HISTORY": {
+        "DATEPROCES": "Date",
+        "USERNAME": "UserName",
+        "OFFICE": "Office",
+        "ACTION": "Action",
+        "DETAIL": "Detail",
+        "FILTERS": {
+            "USERNAME": "Username",
+            "DATEFROM": "Date From",
+            "DATETO": "Date To",
+            "ACTION": "Action",
+            "OFFICE": "Office",
+            "ALL": "All"
+        },
+        "TYPE": {
+            "DispatchCreate": "Dispatch create",
+            "DispatchUpdate": "DIpatch update",
+            "DispatchSend": "Dispatch send",
+            "DispatchRecive": "Dispatch recive",
+            "DispatchFinish": "Dispatch finish",
+            "DispatchDelete": "Dispatch delete",
+            "UserCreate": "User createed",
+            "UserUpdate": "User updated",
+            "UserDelete": "User deleted",
+            "OfficeCreate": "Office created",
+            "OfficeUpdate": "Office updated",
+            "OfficeDelete": "Office deleted",
+            "StockCreate": "Stock created",
+            "StockUpdate": "Stock updated",
+            "StockDeleted": "Stock delted"
+        },
+        "MESSAGE": {
+            "DispatchCreate": "The dispatch {{ActionDetail}} was created",
+            "DispatchUpdate": "The dispatch {{ActionDetail}} was updated",
+            "DispatchSend": "The dispatch {{ActionDetail}} was send",
+            "DispatchRecive": "The dispatch {{ActionDetail}} was recived",
+            "DispatchFinish": "The dispatch {{ActionDetail}} was closed",
+            "DispatchDelete": "The dispatch {{ActionDetail}} was deleted",
+            "UserCreate": "The user {{ActionDetail}} was created",
+            "UserUpdate": "The user {{ActionDetail}} was update",
+            "UserDelete": "The user {{ActionDetail}} was deleted",
+            "OfficeCreate": "The office {{ActionDetail}} was created",
+            "OfficeUpdate": "The office {{ActionDetail}} was updated",
+            "OfficeDelete": "The office {{ActionDetail}} was deleted",
+            "StockCreate": "The stock {{ActionDetail}} was created",
+            "StockUpdate": "The stock {{ActionDetail}} was updated",
+            "StockDeleted": "The stock {{ActionDetail}} was deleted"
+        }
+    },
+    "DISPATCH": {
+        "CODE": "Code",
+        "USERNAME": "UserName",
+        "ORIGIN": "Origin",
+        "DESTINY": "Destiny",
+        "USERORIGIN": "Disptcher",
+        "USERDESTINY": "Received",
+        "DISPATECHEDDATE": "Dispatched date",
+        "CREATEDDATE": "Created date",
+        "RECEIVEDDATE": "Received date",
+        "STATUS": "State",
+        "UNITY": "Unity",
+        "OFFICE": "Office",
+        "ALL": "All",
+        "FROM": "From",
+        "TO": "To",
+        "CLEAN": "Clean",
+        "COUNTRY": "Country",
+        "RECIVE": "Recive",
+        "RECIVED": "Recived",
+        "CREATED": "Created",
+        "ACTIONS": {
+            "SAVE": "The dispatch was confirmed",
+            "UPDATE": "The dispatch was updated",
+            "NOTFOUND": "This item doesn't found in this dispatch"
+        },
+        "STEPS": {
+            "ONE": {
+                "TITLE": "Select destiny"
+            },
+            "TWO": {
+                "TITLE": "Select items"
+            },
+            "THREE": {
+                "TITLE": "Dispatched"
+            }
+        }
+    },
+    "SALEVIEW": {
+        "SEARCH": "Search",
+        "NAME": "Name",
+        "OFFICE": "Office",
+        "CODE": "Code",
+        "BRAND": "Brand",
+        "MODEL": "Model",
+        "UNITY": "Unity",
+        "BACK": "Back",
+        "SALENUMBER": "Sale number"
+    },
+    "SALES": {
+        "CODE": "Code",
+        "DATEPROCESS": "Date process",
+        "USERNAME":"UserName",
+        "OFFICE":"Office",
+        "AMOUNT": "Amount",
+        "STATUS": "Status",       
+        "UNITY": "Unity",
+        "FILTERS":{
+            "CODE":"Code",
+            "DATEFROM":"Date From",
+            "DATETO":"Date To",
+            "STATUS":"Status",
+            "OFFICE":"Office",
+            "USERNAME":"UserName",
+            "ALL":"All",
+            "CLEAN":"Clean"
+        },
+        "ACTIONS": {
+            "FINISHED": "The sale was finished.",
+            "RETURNED": "The sale state change to returned."
+        }
+    },
+    "MENU-USER": {
+        "LENGUAGE": "Lenguage",
+        "LOGOUT": "Logout"
+    },
+    "USERS": {
+        "SEARCH": "Search",
+        "USERNAME": "UserName",
+        "OFFICE": "Office",
+        "NAME": "First name",
+        "LASTNAME": "Last name",
+        "DATEBORN": "Date born",
+        "DATEADMISSION": "Date admission",
+        "EMAIL": "Email",
+        "STATE": "State",
+        "COUNTRY": "Country",
+        "PASSWORD": "Password",
+        "ADDRESS": "Address",
+        "POSTALCODE": "Postal code",
+        "ROLE": "Role",
+        "DISABLED": "Disabled",
+        "CLEAN": "Clean",
+        "ALL": "All",
+        "ACTIONS": {
+            "DELETE": "The user {{user}} was deleted",
+            "SAVE": "The user {{user}} was created",
+            "UPDATE": "The user {{user}} was updated"
+        }
+    },
+    "OFFICE": {
+        "NAME": "Name",
+        "ADDRESS": "Address",
+        "POSTALCODE": "Postal code",
+        "STATUS": "Status",
+        "DISABLED": "Disabled",
+        "STATE": "State",
+        "SEARCH": "Search",
+        "COUNTRY": "Country",
+        "CLEAN": "Clean",
+        "ALL": "All",
+        "ACTIONS": {
+            "DELETE": "The office was deleted",
+            "SAVE": "The office was created",
+            "UPDATE": "The office was updated"
+        }
+    },
+    "STOCK": {
+        "SEARCH": "Search",
+        "NAME": "Name",
+        "OFFICE": "Office",
+        "CODE": "Code",
+        "BRAND": "Brand",
+        "MODEL": "Model",
+        "UNITY": "Unity",
+        "COUNTRY": "Country",
+        "CLEAN": "Clean",
+        "ALL": "All",
+        "PRICE": "Price",
+        "ACTIONS": {
+            "DELETE": "The stock was deleted",
+            "SAVE": "The stock was created",
+            "UPDATE": "The stock was updated"
+        }
+    },
+    "DISCOUNT": {
+        "CODE": "Code",
+        "DATEFROM": "Date From",
+        "DATETO": "Date To",
+        "PERCENT": "Percent",
+        "PAYTMENTTYPE": "Paytment type",
+        "OFFICES": "Offices",
+        "STOCK": "Stock",
+        "STATE": "State",
+        "STATE-LIST": {
+            "true": "Enabled",
+            "false": "Disabled"
+        }
+    },
+    "CHANGES":{
+        "SALECODE": "Sale code",
+        "ITEMCODE": "Item code",
+        "SEARCH": "Search",
+        "NAME": "Name",
+        "OFFICE": "Office",
+        "CODE": "Code",
+        "BRAND": "Brand",
+        "MODEL": "Model",
+        "UNITY": "Unity",
+        "FAVORCREDIT": "Credit in favor",
+        "DEBTOR": "Debtor credit",
+        "MESSAGES": {
+            "SUCCESS": "The change was created"
+        }
+    },
+    "DISCOUNTCREATE": {
+        "BUTTONS": {
+            "ALL": "All",
+            "SELECT": "Select",
+            "REMOVE": "Remove"
+        },
+        "DATEFROM": "Date From",
+        "DATETO": "Date To",
+        "PERCENT": "Percent",
+        "PAYTMENTTYPE": "Paytment type",
+        "WARNING": "If you do not select any product, the discount will be applied to the entire sale.",
+        "MESSAGE": {
+            "SUCCESS": "The discount was created"
+        }
+    },
+    "SALESCREATE": {
+        "CODE": "Code",
+        "NAME": "Name",
+        "UNITY": "Unity",
+        "PRICE": "Price",
+        "DISCOUNT": "Discount",
+        "SUBTOTAL": "SubTotal",
+        "TOTAL": "Total",
+        "PAYTMENTTYPE":"Paytment type",
+        "CREDITCARDNUMBER": "Credit card number",
+        "CREDITNAME": "Full name",
+        "IDENTITY": "Identity number",
+        "SECURITY": "Security code",
+        "MESSAGE": {
+            "SUCCESS":"The sale was created"
+        }
+    },    
+    "GENERALACTIONS": {
+        "ADD": "Add",
+        "EDIT": "Edit",
+        "DELETE": "Delete",
+        "ACCEPT": "Accept",
+        "CANCEL": "Cancel",
+        "SAVE": "Save",
+        "NEXT": "Next",
+        "PREVIOUS": "Previous",
+        "CONFIRM": "Confirm",
+        "HELP": "Help",
+        "VIEW": "View"
+    },
+    "STATES-LIST": {
+        "ENABLED": "Enabled",
+        "DISABLED": "Disabled",
+        "true": "Enabled",
+        "false": "Disabled"
+    },
+    "ROLE-LIST": {
+        "Administrator": "Administrator",
+        "Manager": "Manager",
+        "Seller": "Seller",
+        "Buyer": "Buyer"
+    },
+    "DISPATCH-STATUS-LIST": {
+        "Created": "Created",
+        "Dispatched": "Dispatched",
+        "Received": "Received",
+        "Finalized": "Finalized",
+        "Incomplete": "Incomplete",
+        "Updated": "Updated"
+    },
+    "SALES-STATUS-LIST":{
+        "Initiated": "Started",
+        "Reserved": "Reserved",
+        "Finalized": "Finalized",
+        "Returned": "Returned"
+    },
+    "PAYMENTTYPE-LIST": {
+        "CASH": "Cash",
+        "CARD": "Card",
+        "QR": "QR",
+        "BITCOIN": "Bitcoin"
+    },
+    "DIALOGS": {
+        "DELETE-USER": {
+            "TITLE": "Delete user",
+            "MESSAGE": "Do you want to delete the user?"
+        },
+        "DELETE-OFFICE": {
+            "TITLE": "Delete office",
+            "MESSAGE": "Do you want to delete the office?"
+        },
+        "DELETE-STOCK": {
+            "TITLE": "Delete stock",
+            "MESSAGE": "Do you want to delete the stock?"
+        },
+        "CONFIRM-EXIT": {
+            "TITLE": "Warning",
+            "MESSAGE": "You will lose all changes"
+        },
+        "CANCEL-SALE":{
+            "TITLE": "Warning",
+            "MESSAGE": "You will return all items from the sale."
+        }
+    },
+    "CHIPS": {
+        "OFFICES": {
+            "TITLE": "Offices",
+            "PLACEHOLDER": "Select office",
+            "SELECTOFFICE": "Select office",
+            "SELECTSTOCK": "Select stock"
+        },
+        "SELECTALL": "Select all"
+    },
+    "ERROR-MESSAGE": {
+        "REQUIRED": "Enter is required",
+        "MAXLENGTH": "Over the income limit",
+        "INVALIDCHAR": "Invalid character",
+        "EMAIL": "Must be a valid email address",
+        "ACCESS": "Access dinied"
+    },
+    "ERRORS": {
+        "errOfficeAllReadyExist": "The office name is allready in use",
+        "errSameDestinationAndOrigin": "It's the same office to origin and destination",
+        "errStockNotFound": "Stock not found",
+        "errStockHasChange": "Stock has change",
+        "errProductWithoutStock": "Product without stock",
+        "errCheckDsipatchItems": "Check the dispatch items",
+        "errUserOrPass": "Icorrect user or password",
+        "errDiscountExistsDates": "Discount dates already exist. Do you like to override? "
+    }
+}

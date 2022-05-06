@@ -1,0 +1,237 @@
+<div>
+    <div class="header" fxLayoutAlign="space-between">
+   
+        <div class="searchWrapper" fxLayout="row wrap">
+          <div class="search ml-16 mt-6" fxLayout="row"  appearance="outline" floatLabel="always">  
+            <mat-icon>search</mat-icon>       
+            <input class="search ml-16 mt-6"  autocomplete="off" matInput [formControl]="searchControl.controls.code" placeholder="{{'OFFICE.SEARCH' | translate}}" >
+          </div>  
+        </div>              
+     
+     
+        <div fxFlex fxLayoutAlign="end center" >
+          <mat-paginator fxFlex="60%" [pageSizeOptions]="[1,5, 10, 25, 100]" [length]="tableCountSubject | async"
+          [pageIndex]="0"  [pageSize]="10" showFirstLastButtons >
+           
+          </mat-paginator>
+          <button  mat-mini-fab color="primary"  matTooltip="Agregar" matTooltipPosition="above" (click)="add()" >
+            <mat-icon>add</mat-icon>
+          </button>
+          <div class="paddingButton">
+         <button mat-mini-fab color="primary"  matTooltip="Filtros" matTooltipPosition="above" (click)="sidenav.toggle()" >
+          <mat-icon>filter_list</mat-icon>
+        </button>
+      </div>
+        
+      
+    </div>
+  
+    </div>
+  </div>
+  <div class="container">
+      <form [formGroup]="searchControl">
+       
+        <!--FILTER-->
+        <mat-sidenav-container class="example-container">
+          <mat-sidenav #sidenav mode="side" class="example-sidenav"
+                      position="end"
+                    >
+          <div  fxFlex="100%" fxLayout="row wrap" fxLayoutAlign="space-between">
+            <div fxFlex="90%" fxLayout="row wrap" fxLayoutAlign="center start">
+              <div fxFlex="90%" fxLayout="column">
+                <mat-label fxFlex="100%">{{'SALES.FILTERS.CODE' | translate}}</mat-label>
+                <mat-form-field  appearance="outline" floatLabel="always" 
+                    color="primary">
+                    <input autocomplete="off" matInput formControlName="code"
+                      >
+                </mat-form-field> 
+              </div>
+              <div fxFlex="90%" fxLayout="column">
+                <mat-label fxFlex="100%">{{'SALES.FILTERS.USERNAME' | translate}}</mat-label>
+                <mat-form-field  appearance="outline" floatLabel="always" 
+                    color="primary">
+                    <input autocomplete="off" matInput formControlName="userName"
+                      >
+                </mat-form-field> 
+              </div>
+              <div fxFlex="90%" fxLayout="column">
+                <mat-label fxFlex="100%">{{'SALES.FILTERS.STATUS' | translate}}</mat-label>
+                <mat-form-field fxFlex="100%" appearance="outline" floatLabel="always"  
+                    color="primary">
+                    <mat-select formControlName="state" placeholder="{{'SALES.FILTERS.ALL' | translate}}">      
+                      <mat-option [value]="''">{{'SALES.FILTERS.ALL' | translate}}</mat-option>                          
+                      <mat-option *ngFor="let c of statesData" [value]="c.id" >                   
+                        {{'SALES-STATUS-LIST.' + c.description | translate}}
+                      </mat-option>
+                    </mat-select>  
+                </mat-form-field>
+              </div>
+              <br>
+              <mat-divider></mat-divider>  
+              <br>
+              <!--CREATED DATE-->   
+              <div  fxFlex="90%" fxLayout="row wrap" fxLayoutAlign="space-around">
+                <!--<mat-label fxFlex="100%" fxLayout="column" class="ml-6">{{'sale.CREATEDDATE' | translate}}</mat-label>-->
+                <div fxFlex="47%" fxLayout="column" >
+                  <mat-label>{{'SALES.FILTERS.DATEFROM' | translate}}</mat-label>
+                  <mat-form-field  class="datePicker" floatLabel="always"  appearance="outline">
+                
+                  <input matInput  [matDatepicker]="picker1" placeholder="dd/mm/yyyy" formControlName="dateFrom" readonly>
+                  <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+                  <mat-datepicker #picker1></mat-datepicker>
+                </mat-form-field>
+               
+              </div>
+                <div fxFlex="46%" fxLayout="column" >
+                    <mat-label>{{'SALES.FILTERS.DATETO' | translate}}</mat-label>
+                    <mat-form-field  class="datePicker" floatLabel="always"  appearance="outline">             
+                        <input matInput  [matDatepicker]="picker2" placeholder="dd/mm/yyyy" formControlName="dateTo"
+                        [min]="searchControl.controls.dateFrom.value" readonly>
+                        <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+                        <mat-datepicker #picker2></mat-datepicker>
+                    </mat-form-field>
+                
+                </div>
+              </div>
+              
+                
+             
+              
+                <!--OFFICE--> 
+                <div fxFlex="90%" fxLayout="column">
+                  <mat-label fxFlex="100%">{{'SALES.FILTERS.OFFICE' | translate}}</mat-label>
+                  <mat-form-field appearance="outline" floatLabel="always" 
+                      color="primary">
+                      <mat-select formControlName="office" placeholder="{{'SALES.FILTERS.ALL' | translate}}">      
+                        <mat-option [value]="''">{{'SALES.FILTERS.ALL' | translate}}</mat-option>                          
+                        <mat-option *ngFor="let c of officeData" [value]="c.id" >
+                          {{c.name}}
+                        
+                        </mat-option>
+                      </mat-select>  
+                  </mat-form-field>  
+                </div>  
+            </div>
+           
+            <div fxFlex="100%" fxLayout="row" fxLayoutAlign="center end" class="mb-12">
+              <button fxFlex="90%" fxLayout="row" fxLayoutAlign="center end"
+              matTooltip="Limpiar filtros" matTooltipPosition="above" mat-raised-button color="primary"
+              (click)="clear()">{{'SALES.FILTERS.CLEAN' | translate}}
+               </button>
+            </div>
+            
+           
+           
+          </div>         
+          
+          </mat-sidenav>
+      
+          <mat-sidenav-content fxLayout="row wrap">
+            <!--TABLE-->
+            <mat-table *ngIf="!loading" #table  [dataSource]="dataSource"matSort        
+            (matSortChange)="setMatSorting($event)" class="centerTable scroll">                           
+  
+  
+                <ng-container matColumnDef="CODE">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header fxLayoutAlign="center center">
+                        {{'SALES.CODE' | translate}}
+                    </mat-header-cell>
+                    <mat-cell matTooltip="{{sale.code}}" *matCellDef="let sale" fxLayoutAlign="center center">
+                        <p class="text-truncate" >{{sale.id}}</p>
+                    </mat-cell>
+                </ng-container>
+  
+                <ng-container matColumnDef="DATEPROCESS">
+                  <mat-header-cell *matHeaderCellDef mat-sort-header fxLayoutAlign="center center">
+                      {{'SALES.DATEPROCESS' | translate}}
+                  </mat-header-cell>
+                  <mat-cell *matCellDef="let sale" fxLayoutAlign="center center">
+                    <p class="text-truncate">{{sale.dateProces | date: 'dd/MM/yyyy'}}</p>
+                </mat-cell>
+              </ng-container>       
+  
+                <ng-container matColumnDef="USERNAME">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header fxLayoutAlign="center center">
+                        {{'SALES.USERNAME' | translate}}
+                    </mat-header-cell>
+                    <mat-cell *matCellDef="let sale" fxLayoutAlign="center center">
+                        <p class="text-truncate">{{sale.userDescription}}</p>
+                    </mat-cell>
+                </ng-container>
+  
+                <ng-container matColumnDef="OFFICE">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header fxLayoutAlign="center center">
+                        {{'SALES.OFFICE' | translate}}
+                    </mat-header-cell>
+                    <mat-cell matTooltip="{{sale.officeOriginDescription}}" *matCellDef="let sale" fxLayoutAlign="center center">
+                        <p class="text-truncate">{{sale.officeDescription}}</p>
+                    </mat-cell>
+                </ng-container>
+                
+                <ng-container matColumnDef="AMOUNT">
+                  <mat-header-cell *matHeaderCellDef mat-sort-header fxLayoutAlign="center center">
+                      {{'SALES.AMOUNT' | translate}}
+                  </mat-header-cell>
+                  <mat-cell *matCellDef="let sale" fxLayoutAlign="center center">
+                    <p class="text-truncate">{{sale.amount}}</p>
+                </mat-cell>
+              </ng-container>  
+  
+                
+  
+  
+              <ng-container matColumnDef="STATE">
+                  <mat-header-cell *matHeaderCellDef mat-sort-header fxLayoutAlign="center center">
+                      {{'SALES.STATUS' | translate}}
+                  </mat-header-cell>
+                  <mat-cell *matCellDef="let sale" fxLayoutAlign="center center">
+                    <p class="text-truncate">{{'SALES-STATUS-LIST.' + sale.stateDescription | translate}}</p>
+                </mat-cell>
+              </ng-container>  
+  
+             
+  
+           
+               
+                
+  
+                <ng-container matColumnDef="ACTIONS">
+                    <mat-header-cell *matHeaderCellDef  class="cell50-w"></mat-header-cell>
+                    <mat-cell *matCellDef="let sale" fxLayoutAlign="center center" fxLayout="row" fxLayoutAlign="flex-start center">
+                      <button fxLayoutAlign="center center"  mat-icon-button color="primary" fxFlex="0 1 auto"
+                     
+                      matTooltip= "{{'GENERALACTIONS.VIEW' | translate}}"
+                      (click)="edit(sale)">
+                      <mat-icon  color="primary"  >visibility</mat-icon>
+                  </button>      
+                  <button *ngIf="sale.idState === 3" fxLayoutAlign="center center"  mat-icon-button color="primary" fxFlex="0 1 auto"
+                     
+                  matTooltip= "{{'GENERALACTIONS.DELETE' | translate}}"
+                  (click)="remove(sale)">
+                  <mat-icon   style="color:red"  >delete</mat-icon>
+              </button>      
+                 
+                    </mat-cell>
+                </ng-container>
+  
+                <mat-header-row *matHeaderRowDef="displayedColumns;"></mat-header-row>
+  
+                <mat-row *matRowDef="let sale; columns: displayedColumns;"
+                    [class.user-pointer]="false" matRipple>
+                </mat-row>
+  
+            </mat-table>
+            <!--END TABLE-->
+            <div *ngIf="loading" fxLayout="column" fxFlex="100%"  fxLayoutAlign="center center">
+              <mat-spinner diameter="50" strokeWidth="5"></mat-spinner>
+            </div>
+              
+           
+          </mat-sidenav-content>
+        </mat-sidenav-container>
+      </form>
+  
+    
+  
+  </div>
+  

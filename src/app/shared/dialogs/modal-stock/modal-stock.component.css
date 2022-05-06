@@ -1,0 +1,37 @@
+  .title{
+    color:white;
+    font-weight:bold;
+    font-size: 30px;
+    padding-left: 5%;
+    padding-top: 2%;
+  }
+.wrapper {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-gap: 10px;
+    grid-auto-rows: minmax(25px, auto);   
+  }
+  .one {
+    grid-column:1;
+    grid-row: 1;
+  }
+  .two { 
+    grid-column: 2;
+    grid-row: 1;
+  }
+  .three {
+    grid-column: 3;
+    grid-row: 1;
+  }
+  .four {
+    grid-column:1/4;
+    grid-row: 2;
+  }
+  .paddignButton{
+    padding-bottom: 1%;
+    padding-right: 1%;
+   }
+   .container{
+    width: 1000px;
+    height: 432px;
+   }

@@ -1,0 +1,48 @@
+<div class="main">
+    <div class="header">
+        <div class="title" fxFlex  fxLayout="row" fxLayoutAlign="start start">
+         
+          <span>
+            <button (click)="cancel()" mat-icon-button align="top" >
+              <mat-icon>arrow_back</mat-icon>
+            </button>
+            {{'NAV.STOCK.SUBTITLES.DISPATCHCREATE'  | translate}}
+          </span>
+        </div>
+         
+        </div>
+    <div class="center card">
+      <mat-horizontal-stepper  #cdkStepper linear ngClass="{{ 'last-edited-step-' + cdkStepper.selectedIndex }}" labelPosition="bottom">
+        <mat-step [stepControl]="stepOne.stepOneForm" [editable]="false">
+          <ng-template cdkStepLabel>
+            <div class="step-bullet">1</div>
+            <div class="step-title"> {{'DISPATCH.STEPS.ONE.TITLE'  | translate}}<span class="required">*</span></div>
+          </ng-template>
+          <app-step-one #stepOne [officesData]="officesData" [countriesData]="countriesData" 
+          (dispatch)="setDispatch($event)"
+          [uploadDispatch]="uploadDispatch"
+          ></app-step-one>
+        </mat-step>
+    
+        <mat-step [stepControl]="stepTwo.stepTwoForm" [editable]="false">
+          <ng-template cdkStepLabel>
+            <div class="step-bullet">2</div>
+            <div class="step-title">{{'DISPATCH.STEPS.TWO.TITLE'  | translate}}<span class="required">*</span></div>
+          </ng-template>
+          <app-step-two #stepTwo [uploadDispatch]="uploadDispatch"                        
+                        (dispatchConfirm)="confirm($event)"
+          ></app-step-two>
+        </mat-step>
+    
+        <mat-step [stepControl]="stepThree.stepThreeForm" [editable]="false">
+          <ng-template cdkStepLabel>
+            <div class="step-bullet">3</div>
+            <div class="step-title">{{'DISPATCH.STEPS.THREE.TITLE'  | translate}} </div>
+          </ng-template>
+          <app-step-three  #stepThree></app-step-three>
+        </mat-step>  
+      
+      </mat-horizontal-stepper >
+    </div>
+  </div>
+  

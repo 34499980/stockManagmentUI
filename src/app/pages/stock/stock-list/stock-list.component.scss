@@ -1,0 +1,130 @@
+.container {
+  height: 100vh;
+  margin-right: 0%;
+  margin-left: 0%;
+  overflow: hidden;  
+}
+   .center{
+        position: fixed;
+        top: 220px;
+        left: 30%;
+        margin-top: -100px;
+        margin-left: -100px;
+      }
+    .header{
+      background-color: lightgray;
+      box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+      width: 100%;
+      height: 50px;    
+      position: sticky;
+      top:0;
+      
+    }
+    mat-paginator{
+      background-color: lightgray;
+    }
+    mat-table:hover {
+      overflow-y: scroll;
+    }
+   ng-container{
+    overflow: hidden;  
+   }
+  .example-header {
+    position: fixed;
+   
+  }
+    .title{
+      color:white;
+      font-weight:bold;
+      font-size: 30px;
+      padding-left: 5%;
+      padding-top: 2%;
+    }
+    .searchWrapper {
+      border-radius: 28px;
+       background: white;
+       height: 40px;
+       margin-left: 16px;
+       margin-top: 8px;
+       width: 20%;
+   
+   
+       .search{
+         width: 100%;    
+         line-height: 30px;
+        
+       }
+     }
+  .paddingButton{
+    padding-left: 2%;
+  }
+  mat-table {
+      list-style-type: none;        
+      width: 60%;
+      }
+  
+  .filtter{
+    padding-top: 2%;
+    padding-left: 20px;
+  }      
+  ::ng-deep .mat-toolbar>.mat-form-field-flex > .mat-form-field-infix {
+    padding: 0.4em 0px !important;    
+    
+   }
+  ::ng-deep .mat-form-field-flex > .mat-form-field-infix {
+       padding: 0.4em 0px !important;    
+      }
+  mat-accordion{
+    padding-top: 1%;
+  }
+  mat-sidenav-container{ 
+    background: #d0d0d0;
+    overflow: hidden;
+    .aply-filters-button{
+      padding: 12px;  
+      position: fixed;
+      bottom: 0;
+      right: 0; 
+      width: 200px; 
+  }
+  }
+  .position{
+    display: inline-block;
+    
+   
+  }
+  
+  .example-container {
+   // height: 90%;
+    position: absolute;
+    top: 60px;
+    bottom: 60px;
+    left: 0;
+    right: 0;
+    overflow: hidden;
+  }
+  
+  .example-sidenav {
+    display: flex;
+    align-items: center;  
+    width: 200px;
+    background-color: white;
+    overflow: hidden;
+    height: 100%;
+  }
+  
+  .example-header {
+    position: fixed;
+    width: 90%;
+  }
+  
+  .example-footer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+  }
+  mat-sidenav-content{  
+    background-color: #fff8e1;  
+  }
+  

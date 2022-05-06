@@ -1,0 +1,29 @@
+<div fxFlex="100%" fxLayout="row wrap" fxLayoutAlign="space-between">
+  <form [formGroup]="formControl" fxFlex="100%" fxLayout="row" fxLayoutAlign="center center">
+    <div fxFlex fxLayout="row wrap" fxLayoutAlign="center center"> 
+      <app-inputrequired fxFlex="100%" fxLayout="row" fxLayoutAlign="center" title="{{'USERS.USERNAME' | translate}}"  formControlName="userName"></app-inputrequired>  
+      <app-inputrequired  type="password" fxFlex="100%" fxLayout="row" fxLayoutAlign="center" title="{{'USERS.PASSWORD' | translate}}"  formControlName="password"></app-inputrequired>  
+    </div>
+    
+  
+  </form>
+
+  <div fxFlex="100%" fxLayout="row" fxLayoutAlign="space-around">
+    
+    <button class="mx-8" mat-button mat-dialog-close>
+      <span class="mx-8">
+        Cancelar
+      </span>
+    </button>
+    <button  class="mx-8"mat-raised-button color="primary" (click)="onConfirm()">
+      <span class="mx-8">
+        Aceptar
+      </span>
+    </button>
+  </div>
+
+</div>
+
+  
+ 
+  

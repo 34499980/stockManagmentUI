@@ -1,0 +1,188 @@
+<div>
+  <div class="header" fxLayoutAlign="space-between">
+       <!--SEARCH BAR-->
+        
+       <div class="searchWrapper" fxLayout="row wrap">
+        <div class="search ml-16 mt-6" fxLayout="row"  appearance="outline" floatLabel="always">  
+          <mat-icon>search</mat-icon>       
+          <input class="search ml-16 mt-6"  autocomplete="off" matInput [formControl]="searchControl.controls.userName" placeholder="{{'STOCK.SEARCH' | translate}}" >
+        </div>  
+      </div>
+         
+                   
+ 
+ 
+    <div fxFlex fxLayoutAlign="end center" >
+      <mat-paginator fxFlex="60%" [pageSizeOptions]="[1,5, 10, 25, 100]" [length]="tableCountSubject | async"
+      [pageIndex]="0"  [pageSize]="10" showFirstLastButtons >
+       
+      </mat-paginator>     
+      <div class="paddingButton">
+     <button mat-mini-fab color="primary"  matTooltip="Filtros" matTooltipPosition="above" (click)="sidenav.toggle()" >
+      <mat-icon>filter_list</mat-icon>
+    </button>
+  </div>
+  </div>
+</div>
+<div class="container">
+  <form [formGroup]="searchControl">   
+    <mat-sidenav-container class="example-container">
+      <mat-sidenav #sidenav mode="side" class="example-sidenav" position="end">
+        <div fxFlex="100%" fxLayout="row wrap" fxLayoutAlign="center start"> 
+          <div fxFlex="90%" fxLayout="column">
+            <mat-label fxFlex="100%">{{'HISTORY.FILTERS.USERNAME' | translate}}</mat-label>
+            <mat-form-field fxFlex="100%" appearance="outline" floatLabel="always" 
+                color="primary">
+                <input autocomplete="off" matInput formControlName="userName"
+                  >
+            </mat-form-field> 
+        </div>
+        <div  fxFlex="90%" fxLayout="row wrap" fxLayoutAlign="space-around">
+          <!--<mat-label fxFlex="100%" fxLayout="column" class="ml-6">{{'DISPATCH.CREATEDDATE' | translate}}</mat-label>-->
+          <div fxFlex="47%" fxLayout="column" >
+            <mat-label>{{'HISTORY.FILTERS.DATEFROM' | translate}}</mat-label>
+            <mat-form-field  class="datePicker" floatLabel="always"  appearance="outline">
+          
+            <input matInput  [matDatepicker]="picker1" placeholder="dd/mm/yyyy" formControlName="dateProcesFrom" readonly>
+            <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+            <mat-datepicker #picker1></mat-datepicker>
+          </mat-form-field>
+            <ng-container *ngIf="searchControl.controls.dateProcesFrom.touched">
+            <mat-error *ngIf="searchControl.controls.dateProcesFrom.hasError('required')">{{'ERROR-MESSAGE.REQUIRED' | translate}}</mat-error>         
+            <ng-content></ng-content>
+            </ng-container>
+        </div>
+          <div fxFlex="46%" fxLayout="column" >
+              <mat-label>{{'HISTORY.FILTERS.DATETO' | translate}}</mat-label>
+              <mat-form-field  class="datePicker" floatLabel="always"  appearance="outline">             
+                  <input matInput  [matDatepicker]="picker2" placeholder="dd/mm/yyyy" formControlName="dateProcesTo"
+                  [min]="searchControl.controls.dateProcesFrom.value" readonly>
+                  <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+                  <mat-datepicker #picker2></mat-datepicker>
+              </mat-form-field>
+              <ng-container *ngIf="searchControl.controls.dateProcesTo.touched">
+                  <mat-error *ngIf="searchControl.controls.dateProcesTo.hasError('required')">{{'ERROR-MESSAGE.REQUIRED' | translate}}</mat-error>         
+                  <ng-content></ng-content>
+              </ng-container>  
+          </div>
+        </div>
+        <div fxFlex="90%" fxLayout="column">
+          <mat-label fxFlex="100%">{{'HISTORY.FILTERS.ACTION' | translate}}</mat-label>
+          <mat-form-field fxFlex="100%" appearance="outline" floatLabel="always" 
+              color="primary">
+              <mat-select formControlName="action" placeholder="{{'HISTORY.ALL' | translate}}">      
+                <mat-option [value]="''">{{'HISTORY.FILTERS.ALL' | translate}}</mat-option>                          
+                <mat-option *ngFor="let c of actionsData" [value]="c.id" >
+                  {{c.description}}
+                
+                </mat-option>
+              </mat-select>  
+          </mat-form-field>
+        </div>        
+       
+        <div fxFlex="90%" fxLayout="column">
+          <mat-label fxFlex="100%">{{'HISTORY.FILTERS.OFFICE' | translate}}</mat-label>
+          <mat-form-field fxFlex="100%" appearance="outline" floatLabel="always" 
+              color="primary">
+              <mat-select formControlName="idOffice" placeholder="{{'HISTORY.ALL' | translate}}">      
+                <mat-option [value]="''">{{'HISTORY.FILTERS.ALL' | translate}}</mat-option>                          
+                <mat-option *ngFor="let c of (officeData$|async)" [value]="c.id" >
+                  {{c.name}}
+                
+                </mat-option>
+              </mat-select>  
+          </mat-form-field>
+        </div>        
+
+       
+        
+        <div fxLayout="row" fxLayoutAlign="center end" class="aply-filters-button">
+          <button fxFlex="90%" 
+          matTooltip="Limpiar filtros" matTooltipPosition="above" mat-raised-button color="primary"
+          (click)="clear()">{{'USERS.CLEAN' | translate}}
+            </button>
+        </div>
+      </div>
+      
+      </mat-sidenav>
+  
+      <mat-sidenav-content fxLayout="row wrap">
+       
+         <!--TABLE-->
+          <mat-table *ngIf="!loading" #table [dataSource]="dataSource" matSort        
+           (matSortChange)="setMatSorting($event)" class="center scroll" >                           
+
+
+              <ng-container matColumnDef="DATEPROCES">
+                  <mat-header-cell *matHeaderCellDef mat-sort-header>
+                      {{'HISTORY.DATEPROCES' | translate}}
+                  </mat-header-cell>
+                  <mat-cell *matCellDef="let history">
+                      <p class="text-truncate" >{{history.dateProces | date: 'dd/MM/yyyy'}}</p>
+                  </mat-cell>
+              </ng-container>
+
+              <ng-container matColumnDef="USERNAME">
+                  <mat-header-cell *matHeaderCellDef mat-sort-header>
+                      {{'HISTORY.USERNAME' | translate}}
+                  </mat-header-cell>
+                  <mat-cell *matCellDef="let history">
+                      <p class="text-truncate">{{history.user.userName}}</p>
+                  </mat-cell>
+              </ng-container>
+
+              <ng-container matColumnDef="OFFICE">
+                  <mat-header-cell *matHeaderCellDef mat-sort-header>
+                      {{'HISTORY.OFFICE' | translate}}
+                  </mat-header-cell>
+                  <mat-cell *matCellDef="let history">
+                      <p class="text-truncate">{{history.office.name}}</p>
+                  </mat-cell>
+              </ng-container>
+
+              <ng-container matColumnDef="ACTION">
+                <mat-header-cell *matHeaderCellDef mat-sort-header>
+                    {{'HISTORY.ACTION' | translate}}
+                </mat-header-cell>
+                <mat-cell *matCellDef="let history">
+                    <p class="text-truncate">{{'HISTORY.TYPE.'+ history.subAction | translate}}</p>
+                </mat-cell>
+            </ng-container>
+              
+
+              <ng-container matColumnDef="DETAIL">
+                  <mat-header-cell *matHeaderCellDef mat-sort-header fxFlex="300px">
+                      {{'HISTORY.DETAIL' | translate}}
+                  </mat-header-cell>
+                  <mat-cell *matCellDef="let history" fxFlex="300px">
+                      <p class="text-truncate"  [innerHTML]="'HISTORY.MESSAGE.'+ history.subAction | translate: ({ActionDetail: history.actionDetail})"></p>
+                  </mat-cell>
+              </ng-container>            
+
+             
+
+              <mat-header-row *matHeaderRowDef="displayedColumns;"></mat-header-row>
+
+              <mat-row *matRowDef="let history; columns: displayedColumns;"
+                  [class.user-pointer]="false" matRipple>
+              </mat-row>
+
+          </mat-table>
+          <!--END TABLE-->
+          <div *ngIf="loading"fxLayout="column" fxFlex="100%"  fxLayoutAlign="center center">
+            <mat-spinner diameter="50" strokeWidth="5"></mat-spinner>
+          </div>
+     
+        
+      
+     
+       
+      </mat-sidenav-content>
+    </mat-sidenav-container>
+  </form>
+</div>
+ 
+  
+  
+  
+  

@@ -1,0 +1,111 @@
+<div >
+  <div class="header" fxLayoutAlign="space-between">
+    <!--SEARCH BAR-->     
+
+        <div class="searchWrapper" fxLayout="row wrap">
+          <div class="search ml-16 mt-6" fxLayout="row"  appearance="outline" floatLabel="always">  
+            <mat-icon>search</mat-icon>       
+            <input class="search ml-16 mt-6"  autocomplete="off" matInput [formControl]="searchControl.controls.name" placeholder="{{'USERS.SEARCH' | translate}}" >
+          </div>  
+        </div>
+      <div fxFlex fxLayoutAlign="end center" >
+        <button *ngIf="showAdministrativePermission()" mat-mini-fab color="primary"  matTooltip="Agregar" matTooltipPosition="above" (click)="Add()" >
+          <mat-icon>add</mat-icon>
+        </button>
+        <div class="paddingButton">
+       <button mat-mini-fab color="primary"  matTooltip="Filtros" matTooltipPosition="above" (click)="sidenav.toggle()" >
+        <mat-icon>filter_list</mat-icon>
+      </button>
+    </div>
+  </div>
+
+</div>
+<div class="container">
+  <form  [formGroup]="searchControl"> 
+    <mat-sidenav-container class="example-container">
+      <mat-sidenav #sidenav mode="side" class="example-sidenav" position="end"
+                >
+      <div class="scroll" fxFlex="100%" fxLayout="column" fxLayoutAlign="space-between center">    
+       
+        <div fxFlex="90%" fxLayout="row wrap" fxLayoutAlign="center">
+            <div fxFlex="90%" fxLayout="column">
+              <mat-label fxFlex="90%">{{'USERS.USERNAME' | translate}}</mat-label>
+              <mat-form-field fxFlex="90%"  appearance="outline" floatLabel="always"
+                  color="primary">
+                  <input autocomplete="off" matInput formControlName="name">
+              </mat-form-field> 
+            </div>   
+            <div fxFlex="90%" fxLayout="column">
+              <mat-label fxFlex="100%">{{'USERS.ROLE' | translate}}</mat-label>
+              <mat-form-field appearance="outline" floatLabel="always" 
+                  color="primary">
+                  <mat-select formControlName="role" placeholder="{{'USERS.ALL' | translate}}">      
+                    <mat-option [value]="''">{{'USERS.ALL' | translate}}</mat-option>                          
+                    <mat-option *ngFor="let r of rolesData" [value]="r.id" >
+                      {{'ROLE-LIST.'+r.description | translate}}
+                    
+                    </mat-option>
+                  </mat-select>  
+              </mat-form-field> 
+            </div>
+            <div fxFlex="90%" fxLayout="column">
+              <mat-label fxFlex="100%">{{'USERS.COUNTRY' | translate}}</mat-label>
+              <mat-form-field appearance="outline" floatLabel="always" 
+                  color="primary">
+                  <mat-select formControlName="country" placeholder="{{'USERS.ALL' | translate}}">      
+                    <mat-option [value]="''">{{'USERS.ALL' | translate}}</mat-option>                          
+                    <mat-option *ngFor="let c of countriesData" [value]="c.id" >
+                      {{c.description}}
+                    
+                    </mat-option>
+                  </mat-select>  
+              </mat-form-field>
+            </div>
+            <div fxFlex="90%" fxLayout="column">
+              <mat-label fxFlex="100%">{{'USERS.OFFICE' | translate}}</mat-label>
+              <mat-form-field appearance="outline" floatLabel="always"
+                  color="primary">
+                  <mat-select formControlName="office" placeholder="{{'USERS.ALL' | translate}}"> 
+                    <mat-option [value]="''">{{'USERS.ALL' | translate}}</mat-option>                      
+                    <mat-option *ngFor="let r of officeData" [value]="r.id" >
+                      {{r.name}}
+                    </mat-option>
+                  </mat-select>  
+              </mat-form-field> 
+            </div>
+            <mat-checkbox formControlName="status" appearance="outline" fxLayout="row" floatLabel="always"
+            fxFlex="90%" color="primary">{{'USERS.DISABLED' | translate}}
+          </mat-checkbox>
+        </div>      
+     
+  
+        <div fxFlex="100%" fxLayout="row" fxLayoutAlign="end end" class="mb-16 aply-filters-button">
+          <button fxFlex="100%"
+            matTooltip="Limpiar filtros" matTooltipPosition="above" mat-raised-button color="primary"
+            (click)="clear()">{{'USERS.CLEAN' | translate}}
+              </button>
+        </div>
+      
+      </div>
+      
+      </mat-sidenav>
+  
+      <mat-sidenav-content fxLayout="row wrap">
+        <mat-accordion *ngIf="!loading" hideToggle="true" >
+        <ul class="scroll" *ngFor="let user of usersData">
+          
+          <li>
+              <app-paneluser [user]="user" (reloadEvent)="this.loadData()" ></app-paneluser>
+          </li> 
+           
+         
+        </ul>
+      </mat-accordion>      
+      <div *ngIf="loading" fxFlex fxLayout="column" fxLayoutAlign="center center" style="height:100%">
+        <mat-spinner diameter="50" strokeWidth="5"></mat-spinner>
+      </div>
+       
+      </mat-sidenav-content>
+    </mat-sidenav-container>
+  </form>
+</div>

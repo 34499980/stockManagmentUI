@@ -1,0 +1,45 @@
+ 
+    .center{
+        position: fixed;
+        top: 240px;
+        left: 30%;
+        margin-top: -100px;
+        margin-left: -100px;
+        width: 70%;
+      }
+      .centerTable{ 
+        position: fixed;
+        width: 70%;
+      }
+      .header{
+        background-color: lightsteelblue;
+        box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+        width: 100%;
+        height: 100px;
+      }
+    .title{
+      color:white;
+      font-weight:bold;
+      font-size: 30px;
+      padding-left: 5%;
+      padding-top: 2%;
+    }
+  mat-table {
+      list-style-type: none;        
+      width: 60%;
+      }
+  
+  
+
+  ::ng-deep .mat-form-field-flex > .mat-form-field-infix {
+       padding: 0.4em 0px !important;    
+      }
+  .position{
+    display: inline-block;
+    
+   
+  }
+  .margin-right {
+    margin-right: 12px;
+}
+  

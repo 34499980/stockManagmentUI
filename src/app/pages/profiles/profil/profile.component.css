@@ -1,0 +1,63 @@
+  .header{
+    background-color: lightsteelblue;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    width: 100%;
+    height: 100px;
+  }
+  .title{
+    color:white;
+    font-weight:bold;
+    font-size: 30px;
+    padding-left: 5%;
+    padding-top: 2%;
+  }
+.wrapper {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-gap: 10px;
+    grid-auto-rows: minmax(50px, auto);   
+  }
+  .one {
+    grid-column:2;
+    grid-row: 2;
+  }
+  .two { 
+    grid-column: 3;
+    grid-row: 2;
+  }
+  .three {
+    grid-column: 4;
+    grid-row: 2;
+  }
+  .four {
+    grid-column: 4;
+    grid-row: 3;
+  }
+
+  .card {
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    transition: 0.3s; 
+    width: 60%;   
+  }
+  .center{
+    position: fixed;
+    top: 220px;
+    left: 30%;
+    margin-top: -100px;
+    margin-left: -100px;
+  }
+  ::ng-deep .mat-form-field-flex > .mat-form-field-infix {
+    padding: 0.4em 0px !important;
+    
+   }
+   .paddignButton{
+     padding-top: 3%;
+    padding-bottom: 2%;
+    padding-right: 3%;
+   }
+   .datePicker{
+     width: 85%;
+   }
+   .pointer{
+     cursor: pointer;
+   }

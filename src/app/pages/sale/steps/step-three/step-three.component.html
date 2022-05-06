@@ -1,0 +1,83 @@
+<div fxFlex="100%" fxLayout="row wrap">
+    <!--BUTTONS-->
+    <div fxFlex="100%" fxLayout="row" fxLayoutAlign="space-between">
+        <button  matStepperPrevious matTooltipPosition="above" mat-raised-button
+        (click)="back()" color="primary">{{'GENERALACTIONS.PREVIOUS' | translate}}
+        </button>
+        <h2>${{totalAmount}}</h2>
+        <button  matStepperNext matTooltipPosition="above" mat-raised-button color="primary"
+            (click)="confirm()">{{'GENERALACTIONS.CONFIRM' | translate}}
+        </button>
+    </div>
+    <div fxFlex="100%" fxLayout="row" class="">
+
+        <mat-table fxFlex="100%" #table [dataSource]="dataSource">
+
+
+            <ng-container matColumnDef="CODE">
+                <mat-header-cell *matHeaderCellDef fxFlex fxLayoutAlign="center center">
+                    {{'SALESCREATE.CODE' | translate}}
+                </mat-header-cell>
+                <mat-cell *matCellDef="let total" fxFlex fxLayoutAlign="center center">
+                    <p class="text-truncate">{{total.code}}</p>
+                </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="NAME">
+                <mat-header-cell *matHeaderCellDef fxFlex fxLayoutAlign="center center" mat-sort-header>
+                    {{'SALESCREATE.NAME' | translate}}
+                </mat-header-cell>
+                <mat-cell *matCellDef="let total" fxFlex fxLayoutAlign="center center">
+                    <p class="text-truncate">{{total.name}}</p>
+                </mat-cell>
+            </ng-container>
+            <ng-container matColumnDef="PRICE">
+                <mat-header-cell *matHeaderCellDef fxFlex fxLayoutAlign="center center" mat-sort-header>
+                    {{'SALESCREATE.PRICE' | translate}}
+                </mat-header-cell>
+                <mat-cell *matCellDef="let total" fxFlex fxLayoutAlign="center center">
+                    <p class="text-truncate">${{total.price}}</p>
+                </mat-cell>
+            </ng-container>
+            <ng-container matColumnDef="UNITY">
+                <mat-header-cell *matHeaderCellDef fxFlex fxLayoutAlign="center center" mat-sort-header>
+                    {{'SALESCREATE.UNITY' | translate}}
+                </mat-header-cell>
+                <mat-cell *matCellDef="let total" fxFlex fxLayoutAlign="center center">
+                    <p class="text-truncate">{{total.unity}}</p>
+                </mat-cell>
+            </ng-container>
+            <ng-container matColumnDef="DISCOUNT">
+                <mat-header-cell *matHeaderCellDef fxFlex fxLayoutAlign="center center" mat-sort-header>
+                    {{'SALESCREATE.DISCOUNT' | translate}}
+                </mat-header-cell>
+                <mat-cell *matCellDef="let total" fxFlex fxLayoutAlign="center center">
+                    <p class="text-truncate">{{total.discount}}%</p>
+                </mat-cell>
+            </ng-container>
+            <ng-container matColumnDef="SUBTOTAL">
+                <mat-header-cell *matHeaderCellDef fxFlex fxLayoutAlign="center center" mat-sort-header>
+                    {{'SALESCREATE.SUBTOTAL' | translate}}
+                </mat-header-cell>
+                <mat-cell *matCellDef="let total" fxFlex fxLayoutAlign="center center">
+                    <p class="text-truncate">${{total.subTotal}}</p>
+                </mat-cell>
+            </ng-container>
+            <ng-container matColumnDef="TOTAL">
+                <mat-header-cell *matHeaderCellDef fxFlex fxLayoutAlign="center center" mat-sort-header>
+                    {{'SALESCREATE.TOTAL' | translate}}
+                </mat-header-cell>
+                <mat-cell *matCellDef="let total" fxFlex fxLayoutAlign="center center">
+                    <p class="text-truncate">${{total.total}}</p>
+                </mat-cell>
+            </ng-container>
+
+            <mat-header-row *matHeaderRowDef="displayedColumns;"></mat-header-row>
+
+            <mat-row *matRowDef="let total; columns: displayedColumns;" [class.user-pointer]="false" matRipple>
+            </mat-row>
+
+        </mat-table>
+        <!--END TABLE-->
+    </div>
+</div>

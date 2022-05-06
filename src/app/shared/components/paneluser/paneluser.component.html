@@ -1,0 +1,44 @@
+
+    <mat-expansion-panel  class="mat-elevation-z8">
+     
+      <mat-expansion-panel-header [ngStyle]=" { 'background-color': user.active? 'royalblue': '#f5f5f5'}">
+        <span class="mat-cell"  [ngStyle]=" { 'color': user.active? 'seashell': '#bdbdbd'}">{{user.first_name +" "+user.last_name}}</span>      
+      </mat-expansion-panel-header>    
+   
+      <div class="wrapper">
+        <div class="one">
+          <div fxFlex="100%" fxLayout="row wrap" fxLayoutAlign="flex-start center"  class="mb-12">     
+         
+          <span fxFlex="100" class="mb-4"><strong>{{'USERS.NAME' | translate}}: </strong>{{user.first_name}}</span>
+          <span fxFlex="100" class="mb-4"><strong>{{'USERS.DATEBORN' | translate}}: </strong>{{user.dateBorn | date:'dd/MM/yyyy'}}</span>
+          <span fxFlex="100" class="mb-4"><strong>{{'USERS.EMAIL' | translate}}: </strong>{{user.email}}</span>
+          <span fxFlex="100" class="mb-4"><strong>{{'USERS.POSTALCODE' | translate}}: </strong>{{user.postalCode}}</span>
+          <span fxFlex="100" class="mb-4"><strong>{{'USERS.COUNTRY' | translate}}: </strong>{{user.countryDescription}}</span>   
+          </div>
+        </div>
+        <div class="two">
+          <div fxFlex="100%" fxLayout="row wrap" fxLayoutAlign="flex-start center" class="mb-12">           
+            <span fxFlex="100" class="mb-4"><strong>{{'USERS.LASTNAME' | translate}}: </strong>{{user.last_name}}</span>  
+            <span fxFlex="100" class="mb-4"><strong>{{'USERS.DATEADMISSION' | translate}}: </strong>{{user.dateAdmission | date:'dd/MM/yyyy'}}</span>
+            <span fxFlex="100" class="mb-4"><strong>{{'USERS.ADDRESS' | translate}}: </strong>{{user.address}}</span>
+            <span fxFlex="100" class="mb-4"><strong>{{'USERS.ROLE' | translate}}: </strong>{{user.roleDescription}}</span>
+            <span fxFlex="100" class="mb-4"><strong>{{'USERS.OFFICE' | translate}}: </strong>{{user.officeName}}</span>   
+          </div>
+        </div>
+        <div class="three">
+          <div fxFlex="100%" fxLayout="row wrap" fxLayoutAlign="center center" class="mb-12">   
+            <img fxFlex="100%"   [src]="cameraImage || image"  >
+            <span fxFlex="100"  class="mb-4"><strong>{{'USERS.USERNAME' | translate}}: </strong>{{user.userName}}</span> 
+          </div>
+        </div>
+      </div>
+      <div class="four">
+        <button *ngIf="canEdit()" mat-icon-button matTooltip="Editar">
+          <mat-icon class="pointer"   (click)="VerPerfil(user)" >create</mat-icon>
+      </button>
+       <button mat-icon-button *ngIf="canEdit() &&  user.active"  matTooltip="Eliminar">
+         <mat-icon class="pointer"   style="color:red" (click)="delete(user)" >delete</mat-icon>
+      </button>
+      </div>
+
+    </mat-expansion-panel>

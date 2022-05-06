@@ -1,0 +1,133 @@
+
+<div class="header">
+  
+  <div class="title" fxFlex  fxLayout="row" fxLayoutAlign="start start">
+   
+    <span>
+      <button (click)="cancel()" mat-icon-button align="top" >
+        <mat-icon>arrow_back</mat-icon>
+      </button>
+      {{'NAV.ADMINISTRATION.SUBTITLES.PROFILE' | translate}}
+    </span>
+  </div>
+</div>
+<form [formGroup]="userControl">
+  
+    <div fxFlex="100" class="center card" >
+    <div  class="wrapper">
+      <div class="one">      
+        <app-inputrequired title="{{'USERS.NAME' | translate}}"  formControlName="first_name"></app-inputrequired>
+
+        <mat-form-field  class="datePicker" floatLabel="always"  appearance="outline">
+          <mat-label>{{'USERS.DATEBORN' | translate}}</mat-label>
+          <input matInput  [matDatepicker]="picker2" placeholder="dd/mm/yyyy" formControlName="dateBorn" readonly>
+          <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+          <mat-datepicker #picker2></mat-datepicker>
+        </mat-form-field>
+        <ng-container *ngIf="userControl.controls.dateBorn.touched">
+          <mat-error *ngIf="userControl.controls.dateBorn.hasError('required')">{{'ERROR-MESSAGE.REQUIRED' | translate}}</mat-error>         
+          <ng-content></ng-content>
+      </ng-container>
+       
+        <app-inputrequired title="{{'USERS.EMAIL' | translate}}"  formControlName="email" [type]="'email'"></app-inputrequired>
+        <app-inputrequired title="{{'USERS.POSTALCODE' | translate}}" onlyNumbers  formControlName="postalCode" [type]="'number'"></app-inputrequired>
+       
+       
+
+        <mat-form-field  appearance="outline">
+          <mat-label>{{'USERS.OFFICE' | translate}}</mat-label>
+          <mat-select formControlName="office">                       
+            <mat-option *ngFor="let r of officeData" [value]="r.id" >
+              {{r.name}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+        <ng-container *ngIf="userControl.controls.office.touched">
+          <mat-error  *ngIf="userControl.controls.office.hasError('required')">{{'ERROR-MESSAGE.REQUIRED' | translate}}</mat-error>         
+          <ng-content></ng-content>
+        </ng-container>
+        <mat-form-field *ngIf="canEdit()" appearance="outline">
+          <mat-label>{{'USERS.STATE' | translate}}</mat-label>
+          <mat-select formControlName="state" [(value)]="userControl.controls.state">                       
+            <mat-option [value]="true">{{'STATES-LIST.ENABLED' | translate}}</mat-option>    
+            <mat-option [value]="false">{{'STATES-LIST.DISABLED' | translate}}</mat-option>   
+          </mat-select>  
+        </mat-form-field>
+
+      </div>
+      <div class="two">
+        
+        <app-inputrequired title="{{'USERS.LASTNAME' | translate}}"  formControlName="last_name"></app-inputrequired>
+
+        <mat-form-field class="datePicker" floatLabel="always"  appearance="outline">
+          <mat-label>{{'USERS.DATEADMISSION' | translate}}</mat-label>
+          <input matInput  [matDatepicker]="picker1" placeholder="dd/mm/yyyy" formControlName="dateAdmission" readonly>
+          <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+          <mat-datepicker #picker1></mat-datepicker>
+        </mat-form-field>
+        <ng-container *ngIf="userControl.controls.dateAdmission.touched">
+          <mat-error  *ngIf="userControl.controls.dateAdmission.hasError('required')">{{'ERROR-MESSAGE.REQUIRED' | translate}}</mat-error>         
+          <ng-content></ng-content>
+      </ng-container>
+
+       
+        <app-inputrequired title="{{'USERS.ADDRESS' | translate}}"  formControlName="address" [type]="'text'"></app-inputrequired>
+        <mat-form-field  appearance="outline">
+          <mat-label>{{'USERS.ROLE' | translate}}</mat-label>
+          <mat-select formControlName="role">                       
+            <mat-option *ngFor="let r of rolesData" [value]="r.id" >
+              {{'ROLE-LIST.'+r.description | translate}} 
+            </mat-option>
+          </mat-select>  
+        </mat-form-field>
+        <ng-container *ngIf="userControl.controls.role.touched">
+          <mat-error  *ngIf="userControl.controls.role.hasError('required')">{{'ERROR-MESSAGE.REQUIRED' | translate}}</mat-error>         
+          <ng-content></ng-content>
+        </ng-container>
+        <mat-form-field  appearance="outline">
+          <mat-label>{{'USERS.COUNTRY' | translate}}</mat-label>
+          <mat-select formControlName="country" >                       
+            <mat-option *ngFor="let r of countriesData" [value]="r.id" >
+              {{r.description | translate}} 
+            </mat-option>
+          </mat-select>  
+        </mat-form-field>
+        <ng-container *ngIf="userControl.controls.role.touched">
+          <mat-error  *ngIf="userControl.controls.role.hasError('required')">{{'ERROR-MESSAGE.REQUIRED' | translate}}</mat-error>         
+          <ng-content></ng-content>
+        </ng-container>
+       
+        
+      </div>
+      <div class="three">
+        <div  fxFlex="100%" fxLayout="row wrap">
+        <div fxFlex="100%" >
+          <app-inputrequired title="{{'USERS.USERNAME' | translate}}"  formControlName="userName"></app-inputrequired>
+
+        </div>
+        <div fxFlex="100%">
+          <app-inputrequired title="{{'USERS.PASSWORD' | translate}}" [type]="'password'" formControlName="password"></app-inputrequired>
+        </div>
+       
+
+        <input [disabled]="!canEdit()" type="file" style="width: 5px;" #file (change)="OnFileSelected($event)" style="visibility: hidden" />
+         <img class="pointer" fxFlex="70%" [src]="cameraImage || image" (click)="file.click()" >
+        
+        </div>
+      </div>
+    
+    </div> 
+    <div *ngIf="loading" fxFlex fxLayout="column" fxLayoutAlign="center center" style="height:100%">
+      <mat-spinner diameter="50" strokeWidth="5"></mat-spinner>
+    </div>
+    <div fxFlex="20%"  fxLayout="row" fxLayoutAlign="end center" class="paddignButton">
+      <button mat-button mat-dialog-close (click)="cancel()" >{{'GENERALACTIONS.CANCEL' | translate}}</button>
+     <button mat-raised-button color="primary"   [disabled]="userControl.pristine || userControl.invalid" (click)="saveUsuario()">{{'GENERALACTIONS.SAVE' | translate}}</button>
+  </div>
+  </div>
+    </form>
+   
+
+           
+             
+    

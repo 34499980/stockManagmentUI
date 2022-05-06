@@ -1,0 +1,390 @@
+{
+    "NAV":{
+        "ADMINISTRATION":{
+        "TITLE":"Administración",
+        "SUBTITLES":{
+            "PROFILE": "Perfil",
+            "USERS": "Usuarios",
+            "ANNULMENT": "Anulación",
+            "HISTORY": "Historial",
+            "DISCOUNT": "Descuentos",            
+            "DISCOUNTCREATE": "Creación de descuento"  
+        
+            }
+        },
+        "OFFICE":{
+            "TITLE":"Sucursales",
+            "SUBTITLES":{
+                "OFFICELIST": "Listado de sucursales",
+                "ADDOFFICE": "Crear sucursal",
+                "SALES": "Listado de ventas",
+                "SALESCREATE": "Crear venta",
+                "CHANGES": "Cambios"
+            }
+        },
+        "STOCK":{
+            "TITLE":"Productos",
+            "SUBTITLES":{
+                "STOCKLIST": "Listado de productos",
+                "DISPATCHLIST": "Despachos",
+                "DISPATCHCREATE": "Crear despacho",
+                "DISPATCHDETAIL": "Detalles de despacho"
+              
+            }
+        }
+         
+    
+    },  
+    "MENU-USER":{
+        "LENGUAGE": "Idioma",
+        "LOGOUT": "Cerrar sesión"
+    },  
+    "USERS":{
+        "SEARCH":"Buscar",
+        "USERNAME": "Usuario",
+        "OFFICE": "Sucursal",
+        "NAME": "Nombre",
+        "LASTNAME": "Apellido",
+        "DATEBORN": "Fecha nacimiento",
+        "DATEADMISSION": "Fecha ingreso",
+        "EMAIL": "Email",
+        "STATE": "Estado",
+        "COUNTRY":"Pais",
+        "PASSWORD": "Contraseña",
+        "ADDRESS": "Direccion",
+        "POSTALCODE": "Cod postal",
+        "ROLE": "Rol",
+        "DISABLED": "Deshabilitado",
+        "CLEAN": "Limpiar",
+        "ALL": "Todos",
+        "ACTIONS":{
+            "DELETE": "El usuario {{user}} fue eliminado",
+            "SAVE":"El usuario {{user}} fue creado",            
+            "UPDATE": "El usuario {{user}} fue actualizado"
+        }
+    },
+    "OFFICE":{        
+        "NAME":"Nombre",
+        "ADDRESS": "Dirección",
+        "POSTALCODE": "Codigo postal",
+        "STATUS":"Estado",  
+        "DISABLED": "Deshabilitado",   
+        "STATE": "Estado",  
+        "SEARCH":"Buscar",
+        "COUNTRY":"Pais",
+        "CLEAN": "Limpiar",
+        "ALL": "Todos",
+        "ACTIONS":{
+            "DELETE": "La sucursal fue eliminada",
+            "SAVE":"La sucursal fue creada",            
+            "UPDATE": "La sucursal fue actualizada"
+        }
+        
+    },  
+    "HISTORY":{
+        "DATEPROCES": "Fecha",
+        "USERNAME": "Usuario",
+        "OFFICE": "Sucursal",
+        "ACTION": "Acción",
+        "DETAIL": "Detalle",
+         "FILTERS": {
+            "USERNAME": "Usuario",
+            "DATEFROM": "Desde",
+            "DATETO": "Hasta",
+            "ACTION": "Acción",
+            "OFFICE": "Sucursal",
+            "ALL": "Todos"
+        },
+        "TYPE":{
+            "DispatchCreate": "Despacho creado",
+            "DispatchUpdate": "Despacho actualizado",
+            "DispatchSend": "Despacho enviado",
+            "DispatchRecive": "Despacho recibido",
+            "DispatchFinish": "Despacho finalizado",
+            "DispatchDelete": "Despacho eliminado",
+            "UserCreate": "Usuario creado",
+            "UserUpdate": "Usuario actualizado",
+            "UserDelete": "Usuario eliminado",
+            "OfficeCreate": "Sucursal creado",
+            "OfficeUpdate": "Sucursal actualizado",
+            "OfficeDelete": "Sucursal eliminado",
+            "StockCreate": "Producto creado",
+            "StockUpdate": "Producto actualizado",
+            "StockDeleted": "Producto eliminado"
+
+
+        },
+        "MESSAGE":{
+            "DispatchCreate" : "El despacho {{ActionDetail}} fue creado",
+            "DispatchUpdate": "El despacho {{ActionDetail}} fue actualizado",
+            "DispatchSend": "El despacho {{ActionDetail}} fue enviado",
+            "DispatchRecive": "El despacho {{ActionDetail}} fue recibido",
+            "DispatchFinish": "El despacho {{ActionDetail}} fue finalizado",
+            "DispatchDelete": "El despacho {{ActionDetail}} fue eliminado",
+            "UserCreate": "El usuario {{ActionDetail}} fue creado",
+            "UserUpdate": "El usuario {{ActionDetail}} fue actualizado",
+            "UserDelete": "El usuario {{ActionDetail}} fue eliminado",
+            "OfficeCreate": "La sucursal {{ActionDetail}} fue creado",
+            "OfficeUpdate": "La sucursal {{ActionDetail}} fue actualizado",
+            "OfficeDelete": "La sucursal {{ActionDetail}} fue eliminado",
+            "StockCreate": "El producto {{ActionDetail}} fue creado",
+            "StockUpdate": "El producto {{ActionDetail}} fue actualizado",
+            "StockDeleted": "El producto {{ActionDetail}} fue eliminado"
+
+        }
+    }  ,
+    "DISPATCH":{        
+        "CODE":"Codigo",
+        "USERNAME":"Usuario",
+        "ORIGIN": "Origen",
+        "DESTINY": "Destino",
+        "USERORIGIN": "Despachante", 
+        "USERDESTINY": "Recibio",     
+        "STATE": "Estado",  
+        "CREATEDDATE":"Fecha creado",
+        "DISPATECHEDDATE":"Fecha despachado",
+        "RECEIVEDDATE":"Fecha recibido",
+        "STATUS":"Estado",  
+        "UNITY": "Articulos",
+        "OFFICE": "Sucursal",
+        "ALL": "Todos",
+        "FROM":"Desde",
+        "TO": "Hasta",
+        "CLEAN": "Limpiar",        
+        "COUNTRY": "País",        
+        "RECIVE": "Recibir",        
+        "RECIVED": "Recibido",
+        "CREATED": "Creado",
+        "ACTIONS":{           
+            "SAVE":"El despacho fue confirmado",            
+            "UPDATE": "El despacho fue actualizada",
+            "NOTFOUND": "El producto no se encuentra en el despacho"
+        },
+        "STEPS": {
+            "ONE":{
+                "TITLE":"Seleccionar destino"
+            },
+            "TWO":{
+                "TITLE":"Seleccionar articulos"
+            },
+            "THREE":{
+                "TITLE":"Despachado"
+            }
+        }
+        
+    },  
+    "SALEVIEW":{
+        "SEARCH":"Buscar",
+        "NAME": "Nombre",
+        "OFFICE": "Sucursal",        
+        "CODE": "Codigo",
+        "BRAND": "Marca",
+        "MODEL": "Modelo",
+        "UNITY": "Unidades",
+        "BACK": "Volver",
+        "SALENUMBER": "Numero de venta"
+    },
+    "SALES": {
+        "CODE": "Code",
+        "DATEPROCESS": "Fecha de proceso",
+        "USERNAME":"Usuario",
+        "OFFICE":"Sucursal",
+        "AMOUNT": "Monto",  
+        "STATUS": "Estado",     
+        "UNITY": "Unidades",
+        "FILTERS":{
+            "CODE":"Code",
+            "DATEFROM":"Fecha desde",
+            "DATETO":"Fecha hasta",
+            "OFFICE":"Sucursal",
+            "USERNAME":"Usuario",
+            "STATUS": "Estado",
+            "ALL":"Todos",
+            "CLEAN":"Limpiar"
+        },
+        "ACTIONS": {
+            "FINISHED": "La venta fue finalizada",
+            "RETURNED": "El estado de la venta cambio a devuelto."
+        }
+    },  
+    "STOCK":{
+        "SEARCH":"Buscar",
+        "NAME": "Nombre",
+        "OFFICE": "Sucursal",        
+        "CODE": "Codigo",
+        "BRAND": "Marca",
+        "MODEL": "Modelo",
+        "UNITY": "Unidades", 
+        "COUNTRY": "Pais",      
+        "CLEAN": "Limpiar",
+        "ALL": "Todos",
+        "PRICE": "Precio",               
+        "ACTIONS":{
+            "DELETE": "El producto fue eliminado",
+            "SAVE":"El producto fue creado",            
+            "UPDATE": "El producto fue actualizado"
+        }
+    },
+    "DISCOUNT":{
+        "CODE":"Codigo",
+        "DATEFROM": "Fecha desde",
+        "DATETO":"Fecha hasta",
+        "PERCENT": "Procentaje",
+        "PAYTMENTTYPE": "Tipo de pago",
+        "OFFICES": "Sucursales",
+        "STOCK": "Producto",
+        "STATE":"Estado",
+        "STATE-LIST":{
+            "true":"Habilitado",
+            "false":"Deshabilitado"
+        }
+    },
+    "CHANGES":{
+        "SALECODE": "Codigo venta",
+        "ITEMCODE": "Codigo item",
+        "SEARCH":"Buscar",
+        "NAME": "Nombre",
+        "OFFICE": "Sucursal",        
+        "CODE": "Codigo",
+        "BRAND": "Marca",
+        "MODEL": "Modelo",
+        "UNITY": "Unidades",
+        "DEBTOR": "Credito deudor",
+        "FAVORCREDIT": "Credito a favor",
+        "MESSAGES": {
+            "SUCCESS": "El cambio fue creado"
+        }
+    },
+    "DISCOUNTCREATE":{
+        "BUTTONS": {
+            "ALL": "Todos",
+            "SELECT": "Seleccionar",
+            "REMOVE": "Remover"
+           
+        },
+        "DATEFROM": "Fecha desde",
+        "DATETO":"Fecha hasta",
+        "PERCENT": "Procentaje",
+        "PAYTMENTTYPE": "Tipo de pago",
+        "WARNING": "Si no selecciona ningun producto, el descuento se aplicada a toda la venta",
+        "MESSAGE": {
+            "SUCCESS": "El descuento fue creado"
+        }
+    },
+    "SALESCREATE": {
+        "CODE": "Codigo",
+        "NAME": "Nombre",
+        "UNITY": "Unidad",
+        "PRICE": "Precio",
+        "DISCOUNT": "Descuento",
+        "SUBTOTAL": "SubTotal",
+        "TOTAL": "Total",
+        "PAYTMENTTYPE": "Tipo de pago",
+        "CREDITCARDNUMBER": "Numero de tarjeta",
+        "CREDITNAME": "Nombre completo",
+        "IDENTITY": "DNI",
+        "SECURITY": "Codigo de seguridad",
+        "MESSAGE": {
+            "SUCCESS": "La venta fue creada"
+        }
+    },
+    "GENERALACTIONS":{
+        "ADD":"Agregar",
+        "EDIT": "Editar",
+        "DELETE": "Eliminar",
+        "ACCEPT": "Aceptar",
+        "CANCEL":"Cancelar",
+        "SAVE":"Guardar",
+        "NEXT": "Siguiente",
+        "PREVIOUS": "Volver",
+        "CONFIRM": "Confirmar",
+        "HELP": "Ayuda",
+        "VIEW": "Ver"
+    },
+    "STATES-LIST":{
+        "ENABLED":"Habilitado",
+        "DISABLED":"Deshabilitado",
+        "true":"Habilitado",
+        "false":"Deshabilitado"
+    },
+    "ROLE-LIST":{
+        "Administrator":"Administrador",
+        "Manager": "Gerente",
+        "Seller": "Vendedor",
+        "Buyer": "Comprador"
+    },
+    
+    "DISPATCH-STATUS-LIST":{
+        "Created":"Creado",
+        "Dispatched": "Despachado",
+        "Received": "Recibido",
+        "Finalized": "Finalizado",
+        "Incomplete": "Incompleto",
+        "Updated": "Actualizado" 
+    },
+    "SALES-STATUS-LIST":{
+        "Initiated": "Iniciado",
+        "Reserved": "Reservado",
+        "Finalized": "Finalizado",
+        "Returned": "Devuelto"
+    },
+    "PAYMENTTYPE-LIST": {
+        "CASH": "Efectivo",
+        "CARD": "Tarjeta",
+        "QR": "QR",
+        "BITCOIN": "Bitcoin"
+    },
+    "DIALOGS":{
+        "DELETE-USER":{
+            "TITLE":"Eliminar usuario",
+            "MESSAGE":"Desea eliminar el usuario ?"
+            
+        },
+        "DELETE-OFFICE":{
+            "TITLE":"Eliminar sucursal",
+            "MESSAGE":"Desea eliminar la sucursal ?"
+            
+        },
+        "DELETE-STOCK":{
+            "TITLE":"Eliminar producto",
+            "MESSAGE":"Desea eliminar producto ?"
+            
+        },
+        "CONFIRM-EXIT":{
+            "TITLE":"Advertencia",
+            "MESSAGE":"Se perderan todos los cambios"
+        },
+        "CANCEL-SALE":{
+            "TITLE": "Advertencia",
+            "MESSAGE": "Se devolveran todos los productos de la venta."
+        }
+    }, "CHIPS": {
+        "OFFICES": {
+            "TITLE": "Officinas",
+            "PLACEHOLDER": "Seleccionar oficina",
+            "SELECTOFFICE": "Seleccionar oficinas",
+            "SELECTSTOCK": "Seleccionar producto"
+        },
+        "SELECTALL":"Seleccionar todos"
+    },
+    "ERROR-MESSAGE":{
+        "REQUIRED":"Campo requerido",
+        "MAXLENGTH" : "Supero el limite de caracteres",
+        "INVALIDCHAR": "Caracter invalido",        
+        "EMAIL": "Debe ser un email valido",
+        "ACCESS": "No tiene acceso"
+    },
+    "ERRORS":{
+        "errOfficeAllReadyExist": "El nombre de sucursal ya existe!",
+        "errSameDestinationAndOrigin" : "El destino del despacho no puede ser el mismo que el de origen.",
+        "errStockNotFound": "No se encontro el producto",
+        "errStockHasChange": "El stock fue modificado",
+        "errProductWithoutStock": "Producto sin stock",
+        "errCheckDsipatchItems": "Verifica los articulos del despacho",
+        "errUserOrPass": "Usuario o contraseña incorrecta",        
+        "errDiscountExistsDates": "Las fechas de descuentos ya existen. Desea reescribirlas ?"
+    }
+
+    
+
+}

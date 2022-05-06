@@ -1,0 +1,112 @@
+<div fxFlex="100%" fxLayout="row wrap">
+    <div fxFlex="100%" fxLayout="row" fxLayoutAlign="space-between">
+       
+            <div class="ml-16" fxFlex="100%" fxLayout="row" fxLayoutAlign="start">
+                <button  matStepperPrevious  matTooltipPosition="above"
+                    mat-raised-button (click)="back()" color="primary" >{{'GENERALACTIONS.PREVIOUS' | translate}}
+                </button>
+            </div>
+       
+        <div  fxFlex="100%" fxLayout="row" fxLayoutAlign="end">
+            <button class="ml-12" #next [disabled]="stepThreeForm.controls.paymentType.value === ''" matTooltipPosition="above"
+                mat-raised-button color="primary" (click)="confirm()">{{'GENERALACTIONS.NEXT' | translate}}
+            </button>
+        </div>
+    </div>
+    <!--TOTAL-->
+    <div fxFlex="100%" fxLayoutAlign="center center">
+        <div *ngIf="totalSale - totalChanges > 0 else other">
+            <span>{{'CHANGES.FAVORCREDIT' | translate}}<span style="color: green;">
+                {{totalSale - totalChanges}}
+            </span>
+        </span>
+        </div>
+        <ng-template #other>
+            <span>{{'CHANGES.DEBTOR' | translate}}<span style="color: red;">
+                {{totalSale - totalChanges}}
+            </span>
+        </span>
+        </ng-template>
+        
+    </div>
+     <!--Selector tipo de pago-->
+    <form [formGroup]="stepThreeForm" class="mt-8" fxFlex="100%" fxLayout="row">
+        <mat-form-field class="ml-2" appearance="outline" floatLabel="always" color="primary">
+            <mat-label fxFlex="100%">{{'SALESCREATE.PAYTMENTTYPE' | translate}}</mat-label>
+            <mat-select formControlName="paymentType" placeholder="{{'DISCOUNTCREATE.BUTTONS.SELECT' | translate}}">
+                <mat-option *ngFor="let c of paymentTypeList" [value]="c.id">
+                    {{c.description}}
+
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+
+    </form>
+    <!--CREDIT CARD-->
+    <form [formGroup]="cardForm">
+        <div [style.visibility]="ShowCardOption()? 'visible': 'hidden'">
+
+            <div fxFlex="50%" fxLayout="row wrap">
+                <!--NUMBER-->
+                <div fxFlex="100%" fxLayout="row wrap">
+                    <mat-label class="ml-8" fxFlex="100%" fxLayout="row">{{'SALESCREATE.CREDITCARDNUMBER' | translate}}</mat-label>
+                    <mat-form-field fxFlex="15%" appearance="outline" class="ml-8">
+                        <input matInput #first maxlength="4" onlyNumbers formControlName="first" autocomplete="off">
+                    </mat-form-field>
+
+
+                    <mat-form-field fxFlex="15%" appearance="outline" class="ml-8">
+                        <input matInput #second maxlength="4" onlyNumbers formControlName="second" autocomplete="off">
+                    </mat-form-field>
+
+                    <mat-form-field fxFlex="15%" appearance="outline" class="ml-8">
+                        <input matInput #three maxlength="4" onlyNumbers formControlName="three" autocomplete="off">
+                    </mat-form-field>
+
+                    <mat-form-field fxFlex="15%" appearance="outline" class="ml-8">
+                        <input matInput #four maxlength="4" onlyNumbers formControlName="four" autocomplete="off">
+                    </mat-form-field>
+
+
+                </div>
+                <!--SECURITY-->
+                <div fxFlex="100%" fxLayout="row wrap">
+                    <mat-label class="ml-8" fxFlex="100%"  fxLayout="row">{{'SALESCREATE.SECURITY' | translate}}</mat-label>
+                    <mat-form-field appearance="outline" class="ml-8">
+                        
+                        <input type="password" #security matInput onlyNumbers formControlName="security" autocomplete="off">
+                        <mat-error *ngIf="cardForm.controls.security.hasError('required')">{{'ERROR-MESSAGE.REQUIRED' |
+                            translate}}
+                        </mat-error>
+                    </mat-form-field>
+                  
+                </div>
+                <!--NAME-->
+                <div fxFlex="100%" fxLayout="row wrap">
+                    <mat-label  class="ml-8"fxFlex="100%"  fxLayout="row">{{'SALESCREATE.CREDITNAME' | translate}}</mat-label>
+                    <mat-form-field appearance="outline" class="ml-8">
+                     
+                        <input type="text" matInput #name formControlName="name" autocomplete="off">
+                        <mat-error *ngIf="cardForm.controls.security.hasError('required')">{{'ERROR-MESSAGE.REQUIRED' |
+                            translate}}
+                        </mat-error>
+                    </mat-form-field>                  
+                </div>
+                <!--IDENTITY-->
+                <div fxFlex="100%" fxLayout="row wrap">
+                    <mat-label class="ml-8" fxFlex="100%"  fxLayout="row">{{'SALESCREATE.IDENTITY' | translate}}</mat-label>
+                    <mat-form-field appearance="outline" class="ml-8">
+                       
+                        <input type="number" matInput formControlName="identity" onlyNumbers  autocomplete="off">
+                        <mat-error *ngIf="cardForm.controls.identity.hasError('required')">{{'ERROR-MESSAGE.REQUIRED' |
+                            translate}}
+                        </mat-error>
+                    </mat-form-field>
+                  
+                </div>
+
+            </div>
+        </div>
+    </form>
+
+</div>

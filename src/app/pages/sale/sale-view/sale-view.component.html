@@ -1,0 +1,107 @@
+<div>
+  <div class="header" fxLayoutAlign="space-between">
+    <button  mat-icon-button fxLayoutAlign="center end" matTooltip="{{'SALEVIEW.BACK' | translate}}"
+     (click)="cancel()">
+      <mat-icon>arrow_back</mat-icon>
+    </button>
+    <div class="searchWrapper" fxLayout="row wrap">
+      <div class="search ml-16 mt-6" fxLayout="row" appearance="outline" floatLabel="always">
+        <mat-icon>search</mat-icon>
+        <input class="search ml-16 mt-6" autocomplete="off" matInput [formControl]="searchControl.controls.code"
+          placeholder="{{'SALEVIEW.SEARCH' | translate}}">
+      </div>
+     
+    </div>
+
+
+    <div fxFlex fxLayoutAlign="end end">
+      <h2>{{'SALEVIEW.SALENUMBER' | translate}}: <strong>{{sale.id}}</strong></h2>
+
+    </div>
+
+
+  </div>
+
+
+</div>
+<div class="container">
+  <form [formGroup]="searchControl">
+
+    <!--FILTER-->
+    <mat-sidenav-container class="example-container">
+   
+
+      <mat-sidenav-content fxLayout="row wrap">
+        <!--TABLE-->
+        <mat-table #table  [dataSource]="dataSource"   class="centerTable scroll" >                           
+  
+  
+                <ng-container matColumnDef="CODE">
+                    <mat-header-cell *matHeaderCellDef  fxFlex fxLayoutAlign="center center">
+                        {{'SALEVIEW.CODE' | translate}}
+                    </mat-header-cell>
+                    <mat-cell *matCellDef="let stock" fxFlex fxLayoutAlign="center center">
+                        <p class="text-truncate" >{{stock.code}}</p>
+                    </mat-cell>
+                </ng-container>
+  
+                <ng-container matColumnDef="NAME">
+                  <mat-header-cell *matHeaderCellDef  fxFlex fxLayoutAlign="center center" mat-sort-header>
+                      {{'SALEVIEW.NAME' | translate}}
+                  </mat-header-cell>
+                  <mat-cell *matCellDef="let stock" fxFlex fxLayoutAlign="center center">
+                    <p class="text-truncate">{{stock.name}}</p>
+                </mat-cell>
+              </ng-container>       
+  
+                <ng-container matColumnDef="MODEL">
+                    <mat-header-cell *matHeaderCellDef  fxFlex fxLayoutAlign="center center" mat-sort-header>
+                        {{'SALEVIEW.MODEL' | translate}}
+                    </mat-header-cell>
+                    <mat-cell *matCellDef="let stock" fxFlex fxLayoutAlign="center center">
+                        <p class="text-truncate">{{stock.model}}</p>
+                    </mat-cell>
+                </ng-container>
+  
+                <ng-container matColumnDef="BRAND">
+                    <mat-header-cell *matHeaderCellDef  fxFlex fxLayoutAlign="center center" mat-sort-header>
+                        {{'SALEVIEW.BRAND' | translate}}
+                    </mat-header-cell>
+                    <mat-cell *matCellDef="let stock" fxFlex fxLayoutAlign="center center">
+                        <p class="text-truncate">{{stock.brand}}</p>
+                    </mat-cell>
+                </ng-container>
+                
+                <ng-container matColumnDef="UNITY">
+                  <mat-header-cell *matHeaderCellDef  fxFlex fxLayoutAlign="center center" mat-sort-header>
+                      {{'SALEVIEW.UNITY' | translate}}
+                  </mat-header-cell>
+                  <mat-cell *matCellDef="let stock" fxFlex fxLayoutAlign="center center">
+                    <p class="text-truncate">{{stock.unity}}</p>
+                </mat-cell>
+              </ng-container>  
+               
+  
+               
+  
+                <mat-header-row *matHeaderRowDef="displayedColumns;"></mat-header-row>
+  
+                <mat-row *matRowDef="let stock; columns: displayedColumns;"
+                    [class.user-pointer]="false" matRipple>
+                </mat-row>
+  
+            </mat-table>
+            <!--END TABLE-->
+        <!--END TABLE-->
+        <div *ngIf="loading" fxLayout="column" fxFlex="100%" fxLayoutAlign="center center">
+          <mat-spinner diameter="50" strokeWidth="5"></mat-spinner>
+        </div>
+
+
+      </mat-sidenav-content>
+    </mat-sidenav-container>
+  </form>
+
+
+
+</div>

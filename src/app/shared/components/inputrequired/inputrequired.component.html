@@ -1,0 +1,48 @@
+
+  <div [ngSwitch]="type">
+    <div *ngSwitchCase="'date'">
+      <mat-form-field appearance="outline">
+        <mat-label>{{title}}</mat-label>
+        <input matInput  [matDatepicker]="picker1" placeholder="dd/mm/yyyy" [formControl]="ngControl.control" readonly>
+        <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+        <mat-datepicker #picker1></mat-datepicker>
+      </mat-form-field>    
+    </div>
+    <div *ngSwitchCase="'number'">
+      <mat-form-field class="example-full-width" appearance="outline">
+        <mat-label>{{title}}</mat-label>
+        <input matInput   #input autocomplete="off" type="{{type}}" [min]='0'  [formControl]="ngControl.control">            
+      </mat-form-field>
+      <ng-container *ngIf="ngControl.touched">        
+        <mat-error *ngIf="ngControl.hasError('required')">{{'ERROR-MESSAGE.REQUIRED' | translate}}</mat-error>
+        <mat-error *ngIf="ngControl.hasError('pattern')">{{'ERROR-MESSAGE.INVALIDCHAR' | translate}}</mat-error>
+        <mat-error *ngIf="ngControl.hasError('maxlength')">{{'ERROR-MESSAGE.MAXLENGTH' | translate}}</mat-error>
+        <ng-content></ng-content>
+    </ng-container>
+    </div>
+    <div *ngSwitchCase="'email'">
+      <mat-form-field class="example-full-width" appearance="outline">
+        <mat-label>{{title}}</mat-label>
+        <input matInput   #input autocomplete="off" type="text" [formControl]="ngControl.control">            
+      </mat-form-field>
+      <ng-container *ngIf="ngControl.touched">
+        <mat-error *ngIf="ValidateEmail(ngControl.control.value)">{{'ERROR-MESSAGE.EMAIL' | translate}}</mat-error>
+        <mat-error *ngIf="ngControl.hasError('required')">{{'ERROR-MESSAGE.REQUIRED' | translate}}</mat-error>
+        <mat-error *ngIf="ngControl.hasError('pattern')">{{'ERROR-MESSAGE.INVALIDCHAR' | translate}}</mat-error>
+        <mat-error *ngIf="ngControl.hasError('maxlength')">{{'ERROR-MESSAGE.MAXLENGTH' | translate}}</mat-error>
+        <ng-content></ng-content>
+    </ng-container>
+    </div>
+    <div *ngSwitchDefault>
+      <mat-form-field class="example-full-width" appearance="outline">
+        <mat-label>{{title}}</mat-label>
+        <input matInput   #input autocomplete="off" type="{{type}}" [formControl]="ngControl.control">            
+      </mat-form-field>
+      <ng-container *ngIf="ngControl.touched">       
+        <mat-error *ngIf="ngControl.hasError('required')">{{'ERROR-MESSAGE.REQUIRED' | translate}}</mat-error>
+        <mat-error *ngIf="ngControl.hasError('pattern')">{{'ERROR-MESSAGE.INVALIDCHAR' | translate}}</mat-error>
+        <mat-error *ngIf="ngControl.hasError('maxlength')">{{'ERROR-MESSAGE.MAXLENGTH' | translate}}</mat-error>
+        <ng-content></ng-content>
+    </ng-container>
+    </div>
+  </div>

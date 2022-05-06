@@ -1,0 +1,13 @@
+
+::ng-deep .mat-form-field-appearance-outline .mat-form-field-wrapper {
+    padding-bottom: 6px !important; 
+    
+}
+ ::ng-deep .mat-form-field-hide-placeholder .mat-form-field-label-wrapper {
+    text-align: left;
+    top: -25px;
+ }
+ 
+  ::ng-deep .mat-form-field-should-float {
+    text-align: left;
+ }

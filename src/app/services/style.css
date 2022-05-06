@@ -1,0 +1,59 @@
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+td{
+  width: 30%;
+  padding-left: 1%
+  
+}
+.mat-form-field-appearance-outline .mat-form-field-outline {
+  color: black;
+}
+/* Font color */
+input.mat-input-element {
+  color: black;
+}
+.example-button-row button,
+.example-button-row a {
+  margin-right: 15px;
+}
+
+/* Success syling */
+
+.mat-button.mat-success,
+.mat-stroked-button.mat-success {
+    color: #155724;
+}
+.mat-button.mat-success:hover,
+.mat-stroked-button.mat-success:hover {
+  background-color: #f0fff3;
+}
+
+.mat-raised-button.mat-success,
+.mat-flat-button.mat-success,
+.mat-fab.mat-success,
+.mat-mini-fab.mat-success {
+  color: #f0fff3;
+  background-color: #155724;
+}
+
+.mat-icon-button.mat-success {
+  color:#155724;
+}
+p {
+  font-family: Lato;
+}
+.TransparentButton {
+	background: none;
+	color: inherit;
+	border: none;
+	padding: 0;
+	font: inherit;
+	cursor: pointer;
+	outline: inherit;
+}
+.bold{
+  font-weight: bold;
+}

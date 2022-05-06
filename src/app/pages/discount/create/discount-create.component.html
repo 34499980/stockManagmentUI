@@ -1,0 +1,212 @@
+<div id="page">
+  <div class="header">
+    <div class="title" fxFlex fxLayout="row" fxLayoutAlign="start start">
+
+      <span>
+        <button mat-icon-button align="top">
+          <mat-icon>arrow_back</mat-icon>
+        </button>
+        {{'NAV.ADMINISTRATION.SUBTITLES.DISCOUNTCREATE' | translate}}
+      </span>
+    </div>
+
+  </div>
+  <form fxFlex [formGroup]="controlForm">
+
+    <div fxFlex="80%" fxLayout="row wrap" class="center card">
+      <div fxFlex="100%" fxLayout="row wrap">
+        <!--DATES&PERCENT-->
+        <div fxFlex="100%" fxLayout="row wrap" class="mt-12 ml-12">
+          <div fxFlex="30%" fxLayout="row">
+           
+            <mat-form-field fxFlex="80%" floatLabel="always"  appearance="outline">
+              <mat-label>{{'DISCOUNTCREATE.DATEFROM' | translate}}</mat-label>
+            <input matInput  [matDatepicker]="picker1" placeholder="dd/mm/yyyy" formControlName="dateFrom" readonly>
+            <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+            <mat-datepicker #picker1></mat-datepicker>
+          </mat-form-field>
+            <ng-container *ngIf="controlForm.controls.dateFrom.touched">
+            <mat-error *ngIf="controlForm.controls.dateFrom.hasError('required')">{{'ERROR-MESSAGE.REQUIRED' | translate}}</mat-error>         
+            <ng-content></ng-content>
+            </ng-container>
+
+           
+
+
+
+
+          </div>
+          <div fxFlex="30%" fxLayout="row">
+            <mat-form-field fxFlex="80%" floatLabel="always"  appearance="outline">
+              <mat-label>{{'DISCOUNTCREATE.DATETO' | translate}}</mat-label>
+            <input matInput  [matDatepicker]="picker2" placeholder="dd/mm/yyyy"
+            [min]="controlForm.controls.dateFrom.value" formControlName="dateTo" readonly>
+            <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+            <mat-datepicker #picker2></mat-datepicker>
+          </mat-form-field>
+            <ng-container *ngIf="controlForm.controls.dateTo.touched">
+            <mat-error *ngIf="controlForm.controls.dateTo.hasError('required')">{{'ERROR-MESSAGE.REQUIRED' | translate}}</mat-error>         
+            <ng-content></ng-content>
+            </ng-container>          
+
+
+
+          </div>
+          <div fxFlex="30%" fxLayout="row">
+
+
+            <mat-form-field fxFlex="40%" floatLabel="always" appearance="outline">
+              <mat-label>{{'DISCOUNTCREATE.PERCENT' | translate}}</mat-label>
+              <input matInput autocomplete="off" [min]="0" [max]="100" placeholder="%" formControlName="percent" type="number">
+            </mat-form-field>
+            <ng-container fxFlex="100%" *ngIf="controlForm.controls.percent.touched">
+              <mat-error *ngIf="controlForm.controls.percent.hasError('required')">{{'ERROR-MESSAGE.REQUIRED' |
+                translate}}</mat-error>
+              <ng-content></ng-content>
+            </ng-container>
+
+
+          </div>
+        </div>
+       <!-- <span fxFlex="100%" fxLayout="row" class="mt-4 ml-12 mb-8"><strong>{{'CHIPS.OFFICES.SELECTOFFICE' |
+            translate}}</strong></span>-->
+
+        <!--OFFICES-->
+        <div fxFlex="100%" fxLayout="row">
+          <app-chip fxFlex="60%" fxLayout="row" class="bg-w ml-12" [array]="offices" #chip
+            [chipCtrl]="controlForm.controls.offices" context="create" label="{{'CHIPS.OFFICES.TITLE' | translate}}"
+            [placeholder]="'CHIPS.OFFICES.PLACEHOLDER'" [permissionAdd]="true"
+            [serviceToAll]="officeService.GetOfficesAllChipByCountry" [select]="officeService.GetOfficeSelectChipByName"
+            [permissionRemove]="true"
+            (outEvent)="updateOffices($event)">
+          </app-chip>
+        </div>
+        <!--PAYTMENT-->
+        <div fxFlex="60%" fxLayout="column" class="ml-8">
+          
+                <mat-form-field appearance="outline" floatLabel="always"  
+                    color="primary">
+                    <mat-label fxFlex="100%">{{'DISCOUNTCREATE.PAYTMENTTYPE' | translate}}</mat-label>
+                    <mat-select formControlName="paymentTypes" placeholder="{{'DISCOUNTCREATE.BUTTONS.SELECT' | translate}}"> 
+                      <mat-option *ngFor="let c of paytmentTypeList" [value]="c.id" >
+                        {{c.description}}
+                      
+                      </mat-option>
+                    </mat-select>  
+                </mat-form-field>
+          
+          <ng-container *ngIf="controlForm.controls.paymentTypes.touched">
+            <mat-error *ngIf="controlForm.controls.paymentTypes.hasError('required')">{{'ERROR-MESSAGE.REQUIRED' |
+              translate}}</mat-error>
+            <ng-content></ng-content>
+          </ng-container>
+        </div>
+        <div fxFlex="100%" fxLayout="row wrap" class="ml-8" fxLayoutAlign="start center"
+          *ngFor="let item of paymentTypes">
+
+          <div fxFlex="20%" fxLayout="row">
+            <span fxFlex fxLayoutAlign="start center">{{item.description}}</span>
+            <button fxFlex fxLayoutAlign="start center" matTooltip="{{'DISCOUNTCREATE.BUTTONS.REMOVE' | translate}}"
+              mat-icon-button (click)="remove(item.id)">
+              <mat-icon>clear</mat-icon>
+            </button>
+          </div>
+
+
+
+        </div>
+        <!--STOCK-->
+        <span fxFlex="100%" fxLayout="row" class="mt-4 ml-12 mb-8"><strong>{{'CHIPS.OFFICES.SELECTSTOCK' |
+            translate}}</strong></span>
+
+        <div fxFlex="100%" fxLayout="row">
+          <mat-form-field appearance="outline" class="ml-8">
+            <mat-label>{{'DISPATCH.CODE' | translate}}</mat-label>
+            <input matInput formControlName="stock" #input autocomplete="off">
+          </mat-form-field>
+          <ng-container *ngIf="controlForm.controls.stock.touched">
+            <mat-error *ngIf="controlForm.controls.stock.hasError('maxlength')">{{'ERROR-MESSAGE.MAXLENGTH' |
+              translate}}
+            </mat-error>
+            <mat-error *ngIf="controlForm.controls.stock.hasError('pattern')">{{'ERROR-MESSAGE.INVALIDCHAR' |
+              translate}}
+            </mat-error>
+            <ng-content></ng-content>
+          </ng-container>
+        </div>
+
+
+
+
+
+        <div fxFlex="100%" fxLayout="row wrap" fxLayoutAlign="center center" class="ml-8 mb-12">
+          <div fxFlex="90%" class="heigth card ">
+
+            <!--CARD-CONTAINER-->
+
+
+            <div class="" fxFlex="100%" fxLayout="row wrap">
+              <div fxFlex="100%" fxLayout="row" fxLayoutAlign="end start">
+                <button mat-icon-button [disabled]="stock == undefined" (click)="clear()">
+                  <mat-icon>clear</mat-icon>
+                </button>
+              </div>
+              <div *ngIf="stock != undefined; else other">
+                <div fxFlex="30%" fxLayout="row wrap" fxLayoutAlign="start center" class="ml-16">
+                  <div fxFlex="100%" fxLayout="row">
+                    <label>{{'STOCK.CODE' | translate}}: </label>
+                    <span><strong>{{stock.code}}</strong></span>
+                  </div>
+                  <div fxFlex="100%" fxLayout="row">
+                    <label>{{'STOCK.NAME' | translate}}: </label>
+                    <span><strong> {{stock.name}}</strong></span>
+                  </div>
+                </div>
+
+                <div fxFlex="30%" fxLayout="row wrap" fxLayoutAlign="start center">
+                  <div fxFlex="100%" fxLayout="row">
+                    <label>{{'STOCK.BRAND' | translate}}: </label>
+                    <span><strong>{{stock.brand}}</strong></span>
+                  </div>
+                  <div fxFlex="100%" fxLayout="row">
+                    <label>{{'STOCK.MODEL' | translate}}: </label>
+                    <span><strong>{{stock.model}}</strong></span>
+                  </div>
+
+
+
+                </div>
+
+                <div fxFlex="30%" fxLayout="row" fxLayoutAlign="start start">
+                  <img fxFlex="70%" width="200px" height="150px" [src]="cameraImage">
+                </div>
+              </div>
+              <ng-template #other>
+                <i style="color:darkgrey" fxFlex="100%" fxLayout="row" fxLayoutAlign="center start">
+                  {{'DISCOUNTCREATE.WARNING' |translate}}
+                </i>
+              </ng-template>
+
+            </div>
+          </div>
+        </div>
+
+
+
+
+      </div>
+
+
+      <div *ngIf="loading" fxFlex fxLayout="column" fxLayoutAlign="center center" style="height:100%">
+        <mat-spinner diameter="50" strokeWidth="5"></mat-spinner>
+      </div>
+      <div fxFlex="100%" fxLayout="row" align="end" fxLayoutAlign="end end" class="paddignButton">
+        <button mat-button mat-dialog-close>{{'GENERALACTIONS.CANCEL' | translate}}</button>
+        <button mat-raised-button color="primary"
+        (click)="save()"
+          [disabled]="controlForm.pristine || controlForm.invalid">{{'GENERALACTIONS.SAVE' | translate}}</button>
+      </div>
+    </div>
+
+  </form>
+</div>

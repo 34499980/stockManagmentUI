@@ -1,0 +1,67 @@
+
+<div class="header">
+  <div class="title" fxFlex  fxLayout="row" fxLayoutAlign="start start">
+   
+    <span>
+      <button (click)="cancel()" mat-icon-button align="top" >
+        <mat-icon>arrow_back</mat-icon>
+      </button>
+      {{'NAV.OFFICE.SUBTITLES.ADDOFFICE'  | translate}}
+    </span>
+  </div>
+   
+  </div>
+  <form [formGroup]="controlForm">
+    
+      <div fxFlex="100" class="center card" >
+      <div  class="wrapper">
+        <div class="one paddingLeft">      
+          <app-inputrequired title="{{'OFFICE.NAME' | translate}}"  formControlName="name"></app-inputrequired>  
+         
+         
+          <app-inputrequired title="{{'OFFICE.ADDRESS' | translate}}"  formControlName="address" [type]="'text'"></app-inputrequired>        
+          
+          <mat-form-field *ngIf="showPermissionAdmin()" appearance="outline">
+            <mat-label>{{'OFFICE.STATE' | translate}}</mat-label>
+            <mat-select formControlName="status"  [(value)]="controlForm.controls.status">                       
+              <mat-option [value]="true">{{'STATES-LIST.ENABLED' | translate}}</mat-option>    
+              <mat-option [value]="false">{{'STATES-LIST.DISABLED' | translate}}</mat-option>   
+            </mat-select>  
+          </mat-form-field>
+        </div>
+        <div class="two">
+          <div></div>
+          <app-inputrequired title="{{'OFFICE.POSTALCODE' | translate}}"  formControlName="postalCode"></app-inputrequired> 
+          
+          <mat-form-field  appearance="outline">
+            <mat-label>{{'OFFICE.COUNTRY' | translate}}</mat-label>
+            <mat-select formControlName="country">                       
+              <mat-option *ngFor="let r of countriesData" [value]="r.id" >
+                {{r.description | translate}} 
+              </mat-option>
+            </mat-select>  
+          </mat-form-field>
+          <ng-container *ngIf="controlForm.controls.country.touched">
+            <mat-error  *ngIf="controlForm.controls.country.hasError('required')">{{'ERROR-MESSAGE.REQUIRED' | translate}}</mat-error>         
+            <ng-content></ng-content>
+          </ng-container>
+            
+        </div>
+      
+      </div> 
+      <div *ngIf="loading" fxFlex fxLayout="column" fxLayoutAlign="center center" style="height:100%">
+        <mat-spinner diameter="50" strokeWidth="5"></mat-spinner>
+      </div>
+      <div fxFlex="20%"  fxLayout="row" fxLayoutAlign="end center" class="paddignButton">
+        <button mat-button mat-dialog-close (click)="cancel()" >{{'GENERALACTIONS.CANCEL' | translate}}</button>
+       <button mat-raised-button color="primary" [disabled]="controlForm.pristine || controlForm.invalid" (click)="saveOffice()">{{'GENERALACTIONS.SAVE' | translate}}</button>
+    </div>
+    </div>
+ 
+      </form>
+     
+  
+             
+               
+      
+  

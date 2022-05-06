@@ -1,0 +1,78 @@
+
+.buttonPadding{
+  padding-top: 5;
+  padding-bottom: 5;
+}
+.toolbar{
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 2;
+  width: 100% !important;
+}
+.right{
+  align-content: right;
+   display: block;
+   position: absolute;
+  justify-content:  right;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.Center{  
+  position: absolute;
+    top: 20%;
+    left: 40%;
+  
+    width: 35%;
+    height: 35%;
+}
+.centerText{
+  text-align: center;
+}
+.input{
+  width: 60%;
+}
+.white{
+  color: white
+}
+.paddin-left{
+  padding-left: 10%;
+}
+
+mat-expansion-panel-header  {
+  background-color: #424242;
+  }
+mat-sidenav {
+  background-color:#424242;
+  }
+  mat-expansion-panel {
+    background-color: #757575;
+  }
+ /* ::ng-deep .mat-form-field-hide-placeholder .mat-form-field-label-wrapper {
+    text-align: left;
+    top: -25px;
+ }
+ 
+  ::ng-deep .mat-form-field-should-float {
+    text-align: left;
+ }*/
+
+.pointer {
+	cursor: pointer;
+}
+
+/*::ng-deep .mat-form-field-flex {
+  height: 35px !important;
+}*/
+.sidenav {
+  display: flex;
+  align-items: center;  
+  width: 200px;
+}
+mat-sidenav-content{
+  background-color: #fff8e1;
+}
+.bold {
+  font-weight: bold;
+}

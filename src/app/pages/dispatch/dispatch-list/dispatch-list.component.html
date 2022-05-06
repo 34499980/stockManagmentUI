@@ -1,0 +1,355 @@
+<div>
+  <div class="header" fxLayoutAlign="space-between">
+ 
+      <div class="searchWrapper" fxLayout="row wrap">
+        <div class="search ml-16 mt-6" fxLayout="row"  appearance="outline" floatLabel="always">  
+          <mat-icon>search</mat-icon>       
+          <input class="search ml-16 mt-6"  autocomplete="off" matInput [formControl]="searchControl.controls.code" placeholder="{{'OFFICE.SEARCH' | translate}}" >
+        </div>  
+      </div>              
+   
+   
+      <div fxFlex fxLayoutAlign="end center" >
+        <mat-paginator fxFlex="60%" [pageSizeOptions]="[1,5, 10, 25, 100]" [length]="tableCountSubject | async"
+        [pageIndex]="0"  [pageSize]="10" showFirstLastButtons >
+         
+        </mat-paginator>
+        <button  mat-mini-fab color="primary"  matTooltip="Agregar" matTooltipPosition="above" (click)="add()" >
+          <mat-icon>add</mat-icon>
+        </button>
+        <div class="paddingButton">
+       <button mat-mini-fab color="primary"  matTooltip="Filtros" matTooltipPosition="above" (click)="sidenav.toggle()" >
+        <mat-icon>filter_list</mat-icon>
+      </button>
+    </div>
+      
+    
+  </div>
+
+  </div>
+</div>
+<div class="container">
+    <form [formGroup]="searchControl">
+     
+      <!--FILTER-->
+      <mat-sidenav-container class="example-container">
+        <mat-sidenav #sidenav mode="side" class="example-sidenav"
+                    position="end"
+                  >
+        <div  fxFlex="100%" fxLayout="row wrap" fxLayoutAlign="space-between">
+          <div fxFlex="90%" fxLayout="row wrap" fxLayoutAlign="center start">
+            <div fxFlex="90%" fxLayout="column">
+              <mat-label fxFlex="100%">{{'DISPATCH.CODE' | translate}}</mat-label>
+              <mat-form-field  appearance="outline" floatLabel="always" 
+                  color="primary">
+                  <input autocomplete="off" matInput formControlName="code"
+                    >
+              </mat-form-field> 
+            </div>
+            <div fxFlex="90%" fxLayout="column">
+              <mat-label fxFlex="100%">{{'DISPATCH.USERNAME' | translate}}</mat-label>
+              <mat-form-field  appearance="outline" floatLabel="always" 
+                  color="primary">
+                  <input autocomplete="off" matInput formControlName="name"
+                    >
+              </mat-form-field> 
+            </div>
+            <div fxFlex="90%" fxLayout="column">
+              <mat-label fxFlex="100%">{{'DISPATCH.STATUS' | translate}}</mat-label>
+              <mat-form-field fxFlex="100%" appearance="outline" floatLabel="always"  
+                  color="primary">
+                  <mat-select formControlName="state" placeholder="{{'DISPATCH.ALL' | translate}}">      
+                    <mat-option [value]="''">{{'DISPATCH.ALL' | translate}}</mat-option>                          
+                    <mat-option *ngFor="let c of statesData" [value]="c.id" >                   
+                      {{'DISPATCH-STATUS-LIST.' + c.description | translate}}
+                    </mat-option>
+                  </mat-select>  
+              </mat-form-field>
+            </div>
+            <br>
+            <mat-divider></mat-divider>  
+            <br>
+            <!--CREATED DATE-->   
+            <div  fxFlex="90%" fxLayout="row wrap" fxLayoutAlign="space-around">
+              <!--<mat-label fxFlex="100%" fxLayout="column" class="ml-6">{{'DISPATCH.CREATEDDATE' | translate}}</mat-label>-->
+              <div fxFlex="47%" fxLayout="column" >
+                <mat-label>{{'DISPATCH.CREATED' | translate}} {{'DISPATCH.FROM' | translate}}</mat-label>
+                <mat-form-field  class="datePicker" floatLabel="always"  appearance="outline">
+              
+                <input matInput  [matDatepicker]="picker1" placeholder="dd/mm/yyyy" formControlName="createdDateFrom" readonly>
+                <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+                <mat-datepicker #picker1></mat-datepicker>
+              </mat-form-field>
+                <ng-container *ngIf="searchControl.controls.createdDateFrom.touched">
+                <mat-error *ngIf="searchControl.controls.createdDateFrom.hasError('required')">{{'ERROR-MESSAGE.REQUIRED' | translate}}</mat-error>         
+                <ng-content></ng-content>
+                </ng-container>
+            </div>
+              <div fxFlex="46%" fxLayout="column" >
+                  <mat-label>{{'DISPATCH.CREATED' | translate}} {{'DISPATCH.TO' | translate}}</mat-label>
+                  <mat-form-field  class="datePicker" floatLabel="always"  appearance="outline">             
+                      <input matInput  [matDatepicker]="picker2" placeholder="dd/mm/yyyy" formControlName="createdDateTo"
+                      [min]="searchControl.controls.createdDateFrom.value" readonly>
+                      <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+                      <mat-datepicker #picker2></mat-datepicker>
+                  </mat-form-field>
+                  <ng-container *ngIf="searchControl.controls.createdDateTo.touched">
+                      <mat-error *ngIf="searchControl.controls.createdDateTo.hasError('required')">{{'ERROR-MESSAGE.REQUIRED' | translate}}</mat-error>         
+                      <ng-content></ng-content>
+                  </ng-container>  
+              </div>
+            </div>
+            
+              <!--DISPATCHED DATE-->
+             <!-- <div fxFlex="100%" fxLayout="row wrap" fxLayoutAlign="space-around">
+                <mat-label fxFlex="100%" fxLayout="column" class="ml-6">{{'DISPATCH.DISPATECHEDDATE' | translate}}</mat-label>
+               
+                <div fxFlex="47%" fxLayout="column">
+                  <mat-label>{{'DISPATCH.FROM' | translate}}</mat-label>
+                  <mat-form-field  class="datePicker" floatLabel="always"  appearance="outline">
+                    
+                      <input matInput  [matDatepicker]="picker3" placeholder="dd/mm/yyyy" formControlName="dispatchedDateFrom" readonly>
+                      <mat-datepicker-toggle matSuffix [for]="picker3"></mat-datepicker-toggle>
+                      <mat-datepicker #picker3></mat-datepicker>
+                    </mat-form-field>
+                    <ng-container *ngIf="searchControl.controls.dispatchedDateFrom.touched">
+                      <mat-error *ngIf="searchControl.controls.dispatchedDateFrom.hasError('required')">{{'ERROR-MESSAGE.REQUIRED' | translate}}</mat-error>         
+                      <ng-content></ng-content>
+                  </ng-container>
+                 </div>
+                <div fxFlex="46%" fxLayout="column" >
+                  <mat-label>{{'DISPATCH.TO' | translate}}</mat-label>
+                  <mat-form-field  class="datePicker" floatLabel="always"  appearance="outline">                
+                      <input matInput  [matDatepicker]="picker4" placeholder="dd/mm/yyyy" formControlName="dispatchedDateTo" readonly>
+                      <mat-datepicker-toggle matSuffix [for]="picker4"></mat-datepicker-toggle>
+                      <mat-datepicker #picker4></mat-datepicker>
+                    </mat-form-field>
+                    <ng-container *ngIf="searchControl.controls.dispatchedDateTo.touched">
+                      <mat-error *ngIf="searchControl.controls.dispatchedDateTo.hasError('required')">{{'ERROR-MESSAGE.REQUIRED' | translate}}</mat-error>         
+                      <ng-content></ng-content>
+                  </ng-container>
+                </div>
+                </div>-->
+           
+              <!--RECEIVED DATE-->
+              <div fxFlex="90%" fxLayout="row wrap" fxLayoutAlign="space-around">              
+                <!--<mat-label fxFlex="100%" fxLayout="column" class="ml-6">{{'DISPATCH.RECEIVEDDATE' | translate}}</mat-label>-->
+                
+                <div fxFlex="47%" fxLayout="column">
+                  <mat-label>{{'DISPATCH.RECIVED' | translate}} {{'DISPATCH.FROM' | translate}}</mat-label>
+                  <mat-form-field  class="datePicker" floatLabel="always"  appearance="outline">
+                  
+                      <input matInput  [matDatepicker]="picker5" placeholder="dd/mm/yyyy" formControlName="receivedDateFrom" readonly>
+                      <mat-datepicker-toggle matSuffix [for]="picker5"></mat-datepicker-toggle>
+                      <mat-datepicker #picker5></mat-datepicker>
+                    </mat-form-field>
+                    <ng-container *ngIf="searchControl.controls.receivedDateFrom.touched">
+                      <mat-error *ngIf="searchControl.controls.receivedDateFrom.hasError('required')">{{'ERROR-MESSAGE.REQUIRED' | translate}}</mat-error>         
+                      <ng-content></ng-content>
+                  </ng-container>
+                </div>
+                <div fxFlex="46%" fxLayout="column" >
+                  <mat-label>{{'DISPATCH.RECIVED' | translate}} {{'DISPATCH.TO' | translate}}</mat-label>
+                  <mat-form-field  class="datePicker" floatLabel="always"  appearance="outline">
+                    
+                      <input matInput  [matDatepicker]="picker6" placeholder="dd/mm/yyyy" formControlName="receivedDateTo"
+                      [min]="searchControl.controls.receivedDateFrom.value" readonly>
+                      <mat-datepicker-toggle matSuffix [for]="picker6"></mat-datepicker-toggle>
+                      <mat-datepicker #picker6></mat-datepicker>
+                    </mat-form-field>
+                    <ng-container *ngIf="searchControl.controls.receivedDateTo.touched">
+                      <mat-error *ngIf="searchControl.controls.receivedDateTo.hasError('required')">{{'ERROR-MESSAGE.REQUIRED' | translate}}</mat-error>         
+                      <ng-content></ng-content>
+                  </ng-container>
+                </div>
+              </div>
+              <br>
+              <mat-divider></mat-divider> 
+              <br>
+              <div fxFlex="90%" fxLayout="column">
+                <mat-label fxFlex="100%">{{'OFFICE.COUNTRY' | translate}}</mat-label>
+                <mat-form-field appearance="outline" floatLabel="always"  
+                    color="primary">
+                    <mat-select formControlName="country" placeholder="{{'DISPATCH.ALL' | translate}}"> 
+                      <mat-option *ngFor="let c of countriesData" [value]="c.id" >
+                        {{c.description}}
+                      
+                      </mat-option>
+                    </mat-select>  
+                </mat-form-field>
+              </div>   
+              <div fxFlex="90%" fxLayout="column">
+                <mat-label fxFlex="100%">{{'DISPATCH.OFFICE' | translate}}</mat-label>
+                <mat-form-field appearance="outline" floatLabel="always" 
+                    color="primary">
+                    <mat-select formControlName="destiny" placeholder="{{'DISPATCH.ALL' | translate}}">      
+                      <mat-option [value]="''">{{'DISPATCH.ALL' | translate}}</mat-option>                          
+                      <mat-option *ngFor="let c of officeData" [value]="c.id" >
+                        {{c.name}}
+                      
+                      </mat-option>
+                    </mat-select>  
+                </mat-form-field>  
+              </div>  
+          </div>
+         
+          <div fxFlex="100%" fxLayout="row" fxLayoutAlign="center end" class="mb-12">
+            <button fxFlex="90%" fxLayout="row" fxLayoutAlign="center end"
+            matTooltip="Limpiar filtros" matTooltipPosition="above" mat-raised-button color="primary"
+            (click)="clear()">{{'DISPATCH.CLEAN' | translate}}
+             </button>
+          </div>
+          
+         
+         
+        </div>         
+        
+        </mat-sidenav>
+    
+        <mat-sidenav-content fxLayout="row wrap">
+          <!--TABLE-->
+          <mat-table *ngIf="!loading" #table  [dataSource]="dataSource"matSort        
+          (matSortChange)="setMatSorting($event)" class="centerTable scroll">                           
+
+
+              <ng-container matColumnDef="CODE">
+                  <mat-header-cell *matHeaderCellDef>
+                      {{'DISPATCH.CODE' | translate}}
+                  </mat-header-cell>
+                  <mat-cell matTooltip="{{dispatch.code}}" *matCellDef="let dispatch" fxLayoutAlign="center center">
+                      <p class="text-truncate" >{{dispatch.code}}</p>
+                  </mat-cell>
+              </ng-container>
+
+              <ng-container matColumnDef="CREATEDDATE">
+                <mat-header-cell *matHeaderCellDef mat-sort-header fxLayoutAlign="center center">
+                    {{'DISPATCH.CREATEDDATE' | translate}}
+                </mat-header-cell>
+                <mat-cell *matCellDef="let dispatch" fxLayoutAlign="center center">
+                  <p class="text-truncate">{{dispatch.dateCreate | date: 'dd/MM/yyyy'}}</p>
+              </mat-cell>
+            </ng-container>       
+
+              <ng-container matColumnDef="USERORIGIN">
+                  <mat-header-cell *matHeaderCellDef mat-sort-header fxLayoutAlign="center center">
+                      {{'DISPATCH.USERORIGIN' | translate}}
+                  </mat-header-cell>
+                  <mat-cell *matCellDef="let dispatch" fxLayoutAlign="center center">
+                      <p class="text-truncate">{{dispatch.userOriginDescription}}</p>
+                  </mat-cell>
+              </ng-container>
+
+              <ng-container matColumnDef="ORIGIN">
+                  <mat-header-cell *matHeaderCellDef mat-sort-header fxLayoutAlign="center center">
+                      {{'DISPATCH.ORIGIN' | translate}}
+                  </mat-header-cell>
+                  <mat-cell matTooltip="{{dispatch.officeOriginDescription}}" *matCellDef="let dispatch" fxLayoutAlign="center center">
+                      <p class="text-truncate">{{dispatch.officeOriginDescription}}</p>
+                  </mat-cell>
+              </ng-container>
+              
+              <ng-container matColumnDef="DISPATECHEDDATE">
+                <mat-header-cell *matHeaderCellDef mat-sort-header fxLayoutAlign="center center">
+                    {{'DISPATCH.DISPATECHEDDATE' | translate}}
+                </mat-header-cell>
+                <mat-cell *matCellDef="let dispatch" fxLayoutAlign="center center">
+                  <p class="text-truncate">{{dispatch.dateDispatched | date: 'dd/MM/yyyy'}}</p>
+              </mat-cell>
+            </ng-container>  
+
+              <ng-container matColumnDef="DESTINY">
+                <mat-header-cell *matHeaderCellDef mat-sort-header fxLayoutAlign="center center">
+                    {{'DISPATCH.DESTINY' | translate}}
+                </mat-header-cell>
+                <mat-cell matTooltip="{{dispatch.officeDestinyDescription}}" *matCellDef="let dispatch" fxLayoutAlign="center center">
+                    <p class="text-truncate">{{dispatch.officeDestinyDescription}}</p>
+                </mat-cell>
+            </ng-container>
+              
+             
+
+            <ng-container matColumnDef="USERDESTINY">
+                <mat-header-cell *matHeaderCellDef mat-sort-header fxLayoutAlign="center center">
+                    {{'DISPATCH.USERDESTINY' | translate}}
+                </mat-header-cell>
+                <mat-cell *matCellDef="let dispatch" fxLayoutAlign="center center">
+                  <p class="text-truncate">{{dispatch.userDestinyDescription}}</p>
+              </mat-cell>
+            </ng-container>  
+
+            <ng-container matColumnDef="RECEIVEDDATE">
+                <mat-header-cell *matHeaderCellDef mat-sort-header fxLayoutAlign="center center">
+                    {{'DISPATCH.RECEIVEDDATE' | translate}}
+                </mat-header-cell>
+                <mat-cell *matCellDef="let dispatch" fxLayoutAlign="center center">
+                  <p class="text-truncate">{{dispatch.dateReceived | date: 'dd/MM/yyyy'}}</p>
+              </mat-cell>
+            </ng-container>  
+
+
+            <ng-container matColumnDef="STATUS">
+                <mat-header-cell *matHeaderCellDef mat-sort-header fxLayoutAlign="center center">
+                    {{'DISPATCH.STATUS' | translate}}
+                </mat-header-cell>
+                <mat-cell *matCellDef="let dispatch" fxLayoutAlign="center center">
+                  <p class="text-truncate">{{'DISPATCH-STATUS-LIST.' + dispatch.stateDescription | translate}}</p>
+              </mat-cell>
+            </ng-container>  
+
+            <ng-container matColumnDef="UNITY">
+                <mat-header-cell *matHeaderCellDef mat-sort-header fxLayoutAlign="center center">
+                    {{'DISPATCH.UNITY' | translate}}
+                </mat-header-cell>
+                <mat-cell *matCellDef="let dispatch" fxLayoutAlign="center center">
+                  <p class="text-truncate">{{dispatch.unity}}</p>
+              </mat-cell>
+            </ng-container>  
+
+         
+             
+              
+
+              <ng-container matColumnDef="ACTIONS">
+                  <mat-header-cell *matHeaderCellDef  class="cell50-w"></mat-header-cell>
+                  <mat-cell *matCellDef="let dispatch" fxLayoutAlign="center center" fxLayout="row" fxLayoutAlign="flex-start center">
+                      <button *ngIf="dispatchState(dispatch)" fxLayoutAlign="center center"  mat-icon-button color="primary" fxFlex="0 1 auto"
+                        
+                          matTooltip="{{'GENERALACTIONS.ADD' | translate}}"
+                          (click)="edit(dispatch)">
+                          <mat-icon  color="primary"  >create</mat-icon>
+                      </button>           
+                      <button *ngIf="!dispatchState(dispatch) && !dispatchRecivedState(dispatch)" fxLayoutAlign="center center"  mat-icon-button color="primary" fxFlex="0 1 auto"
+                     
+                      matTooltip= "{{'GENERALACTIONS.VIEW' | translate}}"
+                      (click)="edit(dispatch)">
+                      <mat-icon  color="primary"  >visibility</mat-icon>
+                  </button>    
+                  <button  *ngIf="dispatchRecivedState(dispatch)" fxLayoutAlign="center center" 
+                  mat-raised-button color="warn"
+                  matTooltip="{{'DISPATCH.RECIVE' | translate}}"
+                  (click)="recive(dispatch)">{{'DISPATCH.RECIVE' | translate}}
+                    </button>                         
+               
+                  </mat-cell>
+              </ng-container>
+
+              <mat-header-row *matHeaderRowDef="displayedColumns;"></mat-header-row>
+
+              <mat-row *matRowDef="let dispatch; columns: displayedColumns;"
+                  [class.user-pointer]="false" matRipple>
+              </mat-row>
+
+          </mat-table>
+          <!--END TABLE-->
+          <div *ngIf="loading" fxLayout="column" fxFlex="100%"  fxLayoutAlign="center center">
+            <mat-spinner diameter="50" strokeWidth="5"></mat-spinner>
+          </div>
+            
+         
+        </mat-sidenav-content>
+      </mat-sidenav-container>
+    </form>
+
+  
+
+</div>

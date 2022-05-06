@@ -1,0 +1,30 @@
+<div id="login" class="inner-scroll">
+        <form id="login-intro"[formGroup]="loginForm" (ngSubmit)="onSubmit()" fxLayout="row" fxLayoutAlign="center center">
+            <div class="card" fxLayoutAlign="center center" >
+                <div class ="container">                    
+                    <ngx-avatar fxLayout="100%" fxLayoutAlign="center end" size="70" [src]="cameraImage || image"></ngx-avatar>
+                    <h2>Login</h2>
+                    <div class="form-group" class="input">
+                        <label for="username">Username</label>
+                        <input type="text" formControlName="username"(focusout)="onFocusOutEvent($event)" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.username.errors }" />
+                        <div *ngIf="submitted && f.username.errors" class="invalid-feedback">
+                            <div *ngIf="f.username.errors.required">Username is required</div>
+                        </div>
+                    </div>
+                    <div class="form-group" class="input">
+                        <label for="password">Password</label>
+                        <input type="password" formControlName="password" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.password.errors }" />
+                        <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
+                            <div *ngIf="f.password.errors.required">Password is required</div>
+                        </div>
+                    </div>
+                    <div class="form-group" class="input">
+                        <button [disabled]="loading" class="btn btn-primary">
+                            <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
+                            Login
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </form>    
+</div>

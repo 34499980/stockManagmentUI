@@ -1,0 +1,44 @@
+<div class="container">
+    <form [formGroup]="stepOneForm"
+          (ngSubmit)="stepOneSubmit()"
+          autocomplete="off"
+          novalidate
+          #formRef="ngForm">
+  
+      <div class="input">
+        <mat-form-field  appearance="outline">
+          <mat-label>{{'DISPATCH.COUNTRY' | translate}}</mat-label>
+          <mat-select formControlName="country" >                       
+            <mat-option *ngFor="let r of countriesData" [value]="r.id" >
+              {{r.description | translate}} 
+            </mat-option>
+          </mat-select>  
+        </mat-form-field>
+        <ng-container *ngIf="stepOneForm.controls.country.touched">
+          <mat-error  *ngIf="stepOneForm.controls.country.hasError('required')">{{'ERROR-MESSAGE.REQUIRED' | translate}}</mat-error>         
+          <ng-content></ng-content>
+        </ng-container>
+      </div>
+  
+      <div class="input">
+        <mat-form-field  appearance="outline">
+          <mat-label>{{'DISPATCH.OFFICE' | translate}}</mat-label>
+          <mat-select formControlName="office" >                       
+            <mat-option *ngFor="let r of officesData" [value]="r.id" >
+              {{r.name | translate}} 
+            </mat-option>
+          </mat-select>  
+        </mat-form-field>
+        <ng-container *ngIf="stepOneForm.controls.office.touched">
+          <mat-error  *ngIf="stepOneForm.controls.office.hasError('required')">{{'ERROR-MESSAGE.REQUIRED' | translate}}</mat-error>         
+          <ng-content></ng-content>
+        </ng-container>
+      </div>
+  
+      <div class="button">
+        <button mat-raised-button color="primary"   [disabled]="stepOneForm.pristine || stepOneForm.invalid || disabledButton">{{'GENERALACTIONS.NEXT' | translate}}</button>
+      </div>
+  
+    </form>
+  </div>
+  
